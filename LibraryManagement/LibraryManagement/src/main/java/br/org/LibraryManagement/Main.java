@@ -22,12 +22,15 @@ public class Main {
 //        System.out.println(books.toString());
 //        System.out.println(books.toString());
 
-        System.out.println("New user");
-        Bank bank = BankService.createBank();
+//        System.out.println("New user");
+//        Bank bank = BankService.createBank();
         Address address = AddressService.createAddress();
-        User user = new User(address,bank);
-        System.out.println(user.toString());
-        BankService.deposit(bank,1000);
+        System.out.println(address.toString());
+        AddressService.editAddress(address);
+        System.out.println(address.toString());
+//        User user = new User(address,bank);
+//        System.out.println(user.toString());
+//        BankService.deposit(bank,1000);
 
 
     }

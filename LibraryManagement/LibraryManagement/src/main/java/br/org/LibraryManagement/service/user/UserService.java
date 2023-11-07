@@ -18,21 +18,21 @@ public class UserService {
 
         if (user.getEmail() != null ) {
             String email = CreateParameter.createString("Email: ");
-            user.setUsername(email);
+            user.setEmail(email);
         }
         if (user.getPassword() != null ) {
             String password = CreateParameter.createString("Password: ");
-            user.setUsername(password);
+            user.setPassword(password);
         }
 
         if (user.getAddress() != null ) {
-            String password = CreateParameter.createString("Password: ");
-            user.setUsername(password);
+            Address address = AddressService.editAddress(user.getAddress());
+            user.setAddress(address);
         }
 
         if (user.getBank() != null ) {
-            String password = CreateParameter.createString("Password: ");
-            user.setUsername(password);
+            Bank bank = BankService.editBankAccount(user.getBank());
+            user.setBank(bank);
         }
 
 

@@ -16,15 +16,16 @@ public class BankService {
 
     }
 
-    public static void editBankAccount(Bank bank) {
+    public static Bank editBankAccount(Bank bank) {
 
         if (bank.getAccountNumber() != null) {
             String accountNumber = CreateParameter.createString("Account number: ");
             checkDigitAccountNumber(accountNumber);
             bank.setAccountNumber(accountNumber);
 
-
         }
+
+        return bank;
 
     }
 
@@ -44,6 +45,7 @@ public class BankService {
     }
 
     public static void withdraw(Bank bank, double value) {
+
         checkDigitAccountNumber(bank.getAccountNumber());
         checkAccountNumberIsEqual(bank);
         if (value <= 0) {

@@ -1,5 +1,9 @@
 package br.org.LibraryManagement.domain.model.address;
 
+import br.org.LibraryManagement.util.CreateParameter;
+
+import static br.org.LibraryManagement.service.address.AddressService.checkZipCode;
+
 public class Address {
 
     private String street;
@@ -64,6 +68,17 @@ public class Address {
 
     public void setComplement(String complement) {
         this.complement = complement;
+    }
+
+
+    public static void testCreateAddress(){
+        String street = CreateParameter.createString("Street: ");
+        String neighborhood = CreateParameter.createString("Neighborhood: ");
+        String zipCode = CreateParameter.createString("Zip code: ");
+        checkZipCode(zipCode);
+        String number = CreateParameter.createString("Number: ");
+        String city = CreateParameter.createString("City: ");
+        String complement = CreateParameter.createString("Complement: ");
     }
 
     @Override
