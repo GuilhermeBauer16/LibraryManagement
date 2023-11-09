@@ -35,11 +35,6 @@ public class UserService {
             user.setBank(bank);
         }
 
-
-
-
-
-
     }
 
 

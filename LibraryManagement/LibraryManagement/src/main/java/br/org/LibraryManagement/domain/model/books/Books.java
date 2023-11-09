@@ -18,6 +18,13 @@ public class Books {
         this.paymentMethod = paymentMethod;
     }
 
+    public Books(String name, String description, Double price, BooksCategory booksCategory) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.booksCategory = booksCategory;
+    }
+
     public String getName() {
         return name;
     }
@@ -64,9 +71,7 @@ public class Books {
                 "name: '" + name + '\'' +
                 ", description: '" + description + '\'' +
                 ", price: " + price +
-                ", booksCategory: " + booksCategory +
-                ", payment Method: " + paymentMethod.calculateDiscount(price) +
-                ", price after discount: " + paymentMethod.calculateDiscount(price)
+                ", booksCategory: " + booksCategory
                 ;
     }
 }

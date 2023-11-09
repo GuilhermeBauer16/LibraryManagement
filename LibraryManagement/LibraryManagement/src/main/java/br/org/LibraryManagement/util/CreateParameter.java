@@ -9,7 +9,7 @@ public class CreateParameter {
         public static String createString(String message) {
             Scanner scanner = new Scanner(System.in);
             System.out.print(message);
-            return scanner.next();
+            return scanner.nextLine();
         }
 
         public static int createInt(String message){
@@ -44,5 +44,22 @@ public class CreateParameter {
             }
             return number;
         }
+
+    public static long createLong(String message){
+        Scanner scanner = new Scanner(System.in);
+        long number = 0;
+        while (true){
+
+            System.out.print(message);
+            if (scanner.hasNextLong()){
+                number = scanner.nextLong();
+                break;
+            }else {
+                System.out.println("Please type a number!");
+                scanner.next();
+            }
+        }
+        return number;
+    }
     }
 

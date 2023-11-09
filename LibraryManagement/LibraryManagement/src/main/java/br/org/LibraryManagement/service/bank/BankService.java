@@ -17,9 +17,8 @@ public class BankService {
     }
 
     public static Bank editBankAccount(Bank bank) {
-
-        if (bank.getAccountNumber() != null) {
-            String accountNumber = CreateParameter.createString("Account number: ");
+        String accountNumber = CreateParameter.createString("Account number: ");
+        if (!accountNumber.isEmpty()) {
             checkDigitAccountNumber(accountNumber);
             bank.setAccountNumber(accountNumber);
 
