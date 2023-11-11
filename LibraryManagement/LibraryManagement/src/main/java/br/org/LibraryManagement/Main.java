@@ -19,12 +19,13 @@ public class Main {
     public static void main(String[] args) {
         EntityManager entityManager = JPAUtil.getEntityManager();
 
-        BooksDAO booksDAO = new BooksDAO(entityManager);
-        entityManager.getTransaction().begin();
-        booksDAO.insert();
-        entityManager.getTransaction().commit();
-
-//        Bank bank = BankService.createBank();
+//        BooksDAO booksDAO = new BooksDAO(entityManager);
+//        entityManager.getTransaction().begin();
+//        booksDAO.insert();
+//        entityManager.getTransaction().commit();
+        BooksModel book = BookService.createBook();
+        System.out.println(book.toString());
+//        B ank bank = BankService.createBank();
 //        System.out.println(bank.toString());
 //        Bank bankEdit = BankService.editBankAccount(bank);
 //        System.out.println(bank.toString());

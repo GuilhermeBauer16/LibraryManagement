@@ -1,6 +1,8 @@
 package br.org.LibraryManagement.domain.model.books;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Table(name="books")
@@ -20,6 +22,7 @@ public class BooksModel {
     private BooksCategory booksCategory;
 
 //    private PaymentMethod paymentMethod;
+
 
 
     public BooksModel(String name, String description, Double price, double quantity, BooksCategory booksCategory) {
@@ -80,10 +83,11 @@ public class BooksModel {
 
     @Override
     public String toString() {
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
         return "Books" +
                 "name: '" + name + '\'' +
                 ", description: '" + description + '\'' +
-                ", price: " + price +
+                ", price: " + numberFormat.format(price) +
                 ", booksCategory: " + booksCategory
                 ;
     }
