@@ -1,12 +1,12 @@
 package br.org.LibraryManagement.service.address;
 
-import br.org.LibraryManagement.domain.model.address.Address;
+import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
 public class AddressService {
 
 
-    public static Address createAddress() {
+    public static AddressModel createAddress() {
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
@@ -15,13 +15,13 @@ public class AddressService {
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
 
-        Address address = new Address(street, neighborhood, zipCode, number, city, complement);
+        AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number, city, complement);
 
-        return address;
+        return addressModel;
     }
 
 
-    public static Address editAddress(Address address) {
+    public static AddressModel editAddress(AddressModel addressModel) {
 
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
@@ -31,32 +31,32 @@ public class AddressService {
         String complement = CreateParameter.createString("Complement: ");
 
         if (!street.isEmpty()) {
-            address.setStreet(street);
+            addressModel.setStreet(street);
         }
 
         if (!neighborhood.isEmpty()) {
-            address.setNeighborhood(neighborhood);
+            addressModel.setNeighborhood(neighborhood);
         }
 
         if (!zipCode.isEmpty()) {
 
             checkZipCode(zipCode);
-            address.setZip_code(zipCode);
+            addressModel.setZip_code(zipCode);
         }
 
         if (!number.isEmpty()) {
-            address.setNumber(number);
+            addressModel.setNumber(number);
         }
 
         if (!city.isEmpty()) {
-            address.setCity(city);
+            addressModel.setCity(city);
         }
 
         if (!complement.isEmpty()) {
-            address.setComplement(complement);
+            addressModel.setComplement(complement);
         }
 
-        return address;
+        return addressModel;
 
 
     }

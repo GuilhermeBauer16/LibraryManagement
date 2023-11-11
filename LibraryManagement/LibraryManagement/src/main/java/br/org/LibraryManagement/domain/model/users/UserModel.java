@@ -1,32 +1,39 @@
 package br.org.LibraryManagement.domain.model.users;
 
-import br.org.LibraryManagement.domain.model.address.Address;
-import br.org.LibraryManagement.domain.model.bank.Bank;
+import br.org.LibraryManagement.domain.model.address.AddressModel;
+import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
-public class User {
+import javax.persistence.*;
+
+//@Entity(name= "user_library")
+//@Table(name = "users")
+public class UserModel {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
 
     private String email;
 
-    private Address address;
+    private AddressModel addressModel;
 
-    private Bank bank;
+    private BankModel bankModel;
 
 
-    public User(String username, String password, String email) {
+    public UserModel(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    public User(Address address, Bank bank) {
+    public UserModel(AddressModel addressModel, BankModel bankModel) {
         this.username = CreateParameter.createString("Name: ");
         this.password = CreateParameter.createString("Email: ");
         this.email = CreateParameter.createString("Password: ");
-        this.address = address;
-        this.bank = bank;
+        this.addressModel = addressModel;
+        this.bankModel = bankModel;
 
 
 
@@ -39,8 +46,8 @@ public class User {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + address +
-                ", bank=" + bank +
+                ", address=" + addressModel +
+                ", bank=" + bankModel +
                 '}';
     }
 
@@ -68,19 +75,19 @@ public class User {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressModel getAddress() {
+        return addressModel;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(AddressModel addressModel) {
+        this.addressModel = addressModel;
     }
 
-    public Bank getBank() {
-        return bank;
+    public BankModel getBank() {
+        return bankModel;
     }
 
-    public void setBank(Bank bank) {
-        this.bank = bank;
+    public void setBank(BankModel bankModel) {
+        this.bankModel = bankModel;
     }
 }

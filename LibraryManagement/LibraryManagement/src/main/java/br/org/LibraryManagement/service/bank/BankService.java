@@ -1,6 +1,6 @@
 package br.org.LibraryManagement.service.bank;
 
-import br.org.LibraryManagement.domain.model.bank.Bank;
+import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
 import java.util.regex.Matcher;
@@ -8,53 +8,53 @@ import java.util.regex.Pattern;
 
 public class BankService {
 
-    public static Bank createBank() {
+    public static BankModel createBank() {
         String accountNumber = CreateParameter.createString("Account number: ");
         checkDigitAccountNumber(accountNumber);
 
-        return new Bank(accountNumber);
+        return new BankModel(accountNumber);
 
     }
 
-    public static Bank editBankAccount(Bank bank) {
+    public static BankModel editBankAccount(BankModel bankModel) {
         String accountNumber = CreateParameter.createString("Account number: ");
         if (!accountNumber.isEmpty()) {
             checkDigitAccountNumber(accountNumber);
-            bank.setAccountNumber(accountNumber);
+            bankModel.setAccountNumber(accountNumber);
 
         }
 
-        return bank;
+        return bankModel;
 
     }
 
-    public static void deposit(Bank bank, double value) {
+    public static void deposit(BankModel bankModel, double value) {
 
-        checkDigitAccountNumber(bank.getAccountNumber());
-        checkAccountNumberIsEqual(bank);
+        checkDigitAccountNumber(bankModel.getAccountNumber());
+        checkAccountNumberIsEqual(bankModel);
 
         if (value > 0) {
-            double balance = bank.getBalance();
+            double balance = bankModel.getBalance();
             double deposit = balance + value;
-            bank.setBalance(deposit);
+            bankModel.setBalance(deposit);
             return;
         }
         throw new RuntimeException("Please insert a value plus to 0");
 
     }
 
-    public static void withdraw(Bank bank, double value) {
+    public static void withdraw(BankModel bankModel, double value) {
 
-        checkDigitAccountNumber(bank.getAccountNumber());
-        checkAccountNumberIsEqual(bank);
+        checkDigitAccountNumber(bankModel.getAccountNumber());
+        checkAccountNumberIsEqual(bankModel);
         if (value <= 0) {
             throw new RuntimeException("Please insert a value plus to 0");
         }
 
-        double balance = bank.getBalance();
+        double balance = bankModel.getBalance();
         if (balance >= value) {
             double withdraw = balance - value;
-            bank.setBalance(withdraw);
+            bankModel.setBalance(withdraw);
             return;
         }
 
@@ -71,11 +71,11 @@ public class BankService {
         }
     }
 
-    public static void checkAccountNumberIsEqual(Bank bank){
+    public static void checkAccountNumberIsEqual(BankModel bankModel){
 
         String accountNumber = CreateParameter.createString("Please type your account number: ");
         checkDigitAccountNumber(accountNumber);
-        if (!bank.getAccountNumber().equals(accountNumber)) {
+        if (!bankModel.getAccountNumber().equals(accountNumber)) {
             throw new RuntimeException("The account number is wrong!");
         }
     }

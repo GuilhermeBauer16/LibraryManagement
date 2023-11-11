@@ -1,28 +1,41 @@
 package br.org.LibraryManagement.domain.model.books;
 
-public class Books {
+import javax.persistence.*;
+
+@Entity
+@Table(name="books")
+public class BooksModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String description;
     private Double price;
 
+    private double quantity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "book_category")
     private BooksCategory booksCategory;
 
-    private PaymentMethod paymentMethod;
+//    private PaymentMethod paymentMethod;
 
-    public Books(String name, String description, Double price, BooksCategory booksCategory, PaymentMethod paymentMethod) {
+
+    public BooksModel(String name, String description, Double price, double quantity, BooksCategory booksCategory) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.quantity = quantity;
         this.booksCategory = booksCategory;
-        this.paymentMethod = paymentMethod;
     }
 
-    public Books(String name, String description, Double price, BooksCategory booksCategory) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.booksCategory = booksCategory;
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -57,13 +70,13 @@ public class Books {
         this.booksCategory = booksCategory;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
+//    public PaymentMethod getPaymentMethod() {
+//        return paymentMethod;
+//    }
+//
+//    public void setPaymentMethod(PaymentMethod paymentMethod) {
+//        this.paymentMethod = paymentMethod;
+//    }
 
     @Override
     public String toString() {

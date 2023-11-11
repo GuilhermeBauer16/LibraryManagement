@@ -16,22 +16,24 @@ public enum BooksCategory {
         this.valueId = valueId;
     }
 
-    public static void listBookCategory(){
-        for (BooksCategory category : BooksCategory.values()){
+    public static void listBookCategory() {
+        for (BooksCategory category : BooksCategory.values()) {
             System.out.println("Category: " + category.name());
 
         }
     }
 
-    public static BooksCategory getBooksCategoryByValueId(long valueCategory){
-        for(BooksCategory category : BooksCategory.values()){
-            if(category.valueId == valueCategory){
+    public static BooksCategory getBooksCategoryByValueId(long valueCategory) {
+        for (BooksCategory category : values()) {
+
+            if (category.valueId == valueCategory) {
                 return category;
 
             }
 
+
         }
-        return BooksCategory.OTHER;
+        throw new IllegalArgumentException("Please type a valid category! ");
     }
 
     public long getValueId() {

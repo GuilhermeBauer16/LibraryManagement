@@ -4,7 +4,7 @@ import br.org.LibraryManagement.util.CreateParameter;
 
 import static br.org.LibraryManagement.service.address.AddressService.checkZipCode;
 
-public class Address {
+public class AddressModel {
 
     private String street;
     private String neighborhood;
@@ -13,7 +13,7 @@ public class Address {
     private String city;
     private String complement;
 
-    public Address(String street, String neighborhood, String zip_code, String number, String city, String complement) {
+    public AddressModel(String street, String neighborhood, String zip_code, String number, String city, String complement) {
         this.street = street;
         this.neighborhood = neighborhood;
         this.zip_code = zip_code;

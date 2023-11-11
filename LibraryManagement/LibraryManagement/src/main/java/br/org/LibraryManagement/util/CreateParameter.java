@@ -1,10 +1,12 @@
 package br.org.LibraryManagement.util;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CreateParameter {
-
-
 
         public static String createString(String message) {
             Scanner scanner = new Scanner(System.in);
@@ -34,7 +36,7 @@ public class CreateParameter {
             while (true){
 
                 System.out.print(message);
-                if (scanner.hasNextInt()){
+                if (scanner.hasNextDouble()){
                     number = scanner.nextDouble();
                     break;
                 }else {
@@ -42,6 +44,7 @@ public class CreateParameter {
                     scanner.next();
                 }
             }
+
             return number;
         }
 

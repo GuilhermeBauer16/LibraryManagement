@@ -1,12 +1,12 @@
 package br.org.LibraryManagement.domain.model.bank;
 
-public class Bank {
+public class BankModel {
 
     private String accountNumber;
 
     private double balance;
 
-    public Bank(String accountNumber) {
+    public BankModel(String accountNumber) {
         this.accountNumber = accountNumber;
 
     }

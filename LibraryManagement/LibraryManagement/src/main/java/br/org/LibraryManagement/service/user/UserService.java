@@ -1,38 +1,38 @@
 package br.org.LibraryManagement.service.user;
 
-import br.org.LibraryManagement.domain.model.address.Address;
-import br.org.LibraryManagement.domain.model.bank.Bank;
-import br.org.LibraryManagement.domain.model.users.User;
+import br.org.LibraryManagement.domain.model.address.AddressModel;
+import br.org.LibraryManagement.domain.model.bank.BankModel;
+import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
 
 public class UserService {
 
-    public static void editUser(User user){
+    public static void editUser(UserModel userModel){
 
-        if (user.getUsername() != null ) {
+        if (userModel.getUsername() != null ) {
             String username = CreateParameter.createString("Name: ");
-            user.setUsername(username);
+            userModel.setUsername(username);
         }
 
-        if (user.getEmail() != null ) {
+        if (userModel.getEmail() != null ) {
             String email = CreateParameter.createString("Email: ");
-            user.setEmail(email);
+            userModel.setEmail(email);
         }
-        if (user.getPassword() != null ) {
+        if (userModel.getPassword() != null ) {
             String password = CreateParameter.createString("Password: ");
-            user.setPassword(password);
+            userModel.setPassword(password);
         }
 
-        if (user.getAddress() != null ) {
-            Address address = AddressService.editAddress(user.getAddress());
-            user.setAddress(address);
+        if (userModel.getAddress() != null ) {
+            AddressModel addressModel = AddressService.editAddress(userModel.getAddress());
+            userModel.setAddress(addressModel);
         }
 
-        if (user.getBank() != null ) {
-            Bank bank = BankService.editBankAccount(user.getBank());
-            user.setBank(bank);
+        if (userModel.getBank() != null ) {
+            BankModel bankModel = BankService.editBankAccount(userModel.getBank());
+            userModel.setBank(bankModel);
         }
 
     }

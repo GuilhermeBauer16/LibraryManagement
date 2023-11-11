@@ -1,21 +1,21 @@
 package br.org.LibraryManagement.service.book;
 
-import br.org.LibraryManagement.domain.model.books.Books;
+import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
-import br.org.LibraryManagement.domain.model.books.PaymentMethod;
 import br.org.LibraryManagement.util.CreateParameter;
 
 public class BookService {
 
-    public static Books createBook(){
+    public static BooksModel createBook(){
         System.out.println("New book");
         String name = CreateParameter.createString("Name: ");
         String description = CreateParameter.createString("Description: ");
-        Double price = CreateParameter.createDouble("Price: ");
+        double price = CreateParameter.createDouble("Price: ");
+        double quantity = CreateParameter.createDouble("Quatity: ");
         listBookCategory();
         long category = CreateParameter.createLong("Type the number of the category: ");
         BooksCategory booksCategory = BooksCategory.getBooksCategoryByValueId(category);
-         return new Books(name,description,price,booksCategory);
+         return new BooksModel(name,description,price, quantity, booksCategory);
 
 
     }
