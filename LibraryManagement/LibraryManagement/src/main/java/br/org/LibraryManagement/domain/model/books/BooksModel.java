@@ -24,6 +24,8 @@ public class BooksModel {
 //    private PaymentMethod paymentMethod;
 
 
+    public BooksModel() {
+    }
 
     public BooksModel(String name, String description, Double price, double quantity, BooksCategory booksCategory) {
         this.name = name;
@@ -85,6 +87,7 @@ public class BooksModel {
     public String toString() {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
         return "Books" +
+                "id " + id + " " +
                 "name: '" + name + '\'' +
                 ", description: '" + description + '\'' +
                 ", price: " + numberFormat.format(price) +
