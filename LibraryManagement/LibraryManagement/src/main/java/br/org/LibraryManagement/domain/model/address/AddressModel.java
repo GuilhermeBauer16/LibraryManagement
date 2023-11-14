@@ -2,10 +2,17 @@ package br.org.LibraryManagement.domain.model.address;
 
 import br.org.LibraryManagement.util.CreateParameter;
 
+import javax.persistence.*;
+
 import static br.org.LibraryManagement.service.address.AddressService.checkZipCode;
 
+@Entity
+@Table(name = "address")
 public class AddressModel {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String street;
     private String neighborhood;
     private String zip_code;
@@ -15,7 +22,10 @@ public class AddressModel {
     private String city;
     private String complement;
 
-    public AddressModel(String street, String neighborhood, String zip_code, String number,String state, String city, String complement) {
+    public AddressModel() {
+    }
+
+    public AddressModel(String street, String neighborhood, String zip_code, String number, String state, String city, String complement) {
         this.street = street;
         this.neighborhood = neighborhood;
         this.zip_code = zip_code;

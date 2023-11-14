@@ -19,14 +19,16 @@ public class AddressDAO {
 
     public void insert() {
 
+        AddressModel address = AddressService.createAddress();
+
         try {
             entityManager.getTransaction().begin();
-            AddressService.createAddress();
+            entityManager.persist(address);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-
             entityManager.getTransaction().rollback();
-            System.out.println("Have a error for create this address " + ex.getMessage());
+            throw new RuntimeException("Have a error for create this address " + ex.getMessage(), ex);
+
 
         }
 
@@ -47,8 +49,8 @@ public class AddressDAO {
 
     }
 
-    public void editAddress(AddressModel addressModel) {
-
+    public void editAddress() {
+        showAllAddress();
         try {
 
             AddressModel editedAddress = AddressService.editAddress(findByAddressId());

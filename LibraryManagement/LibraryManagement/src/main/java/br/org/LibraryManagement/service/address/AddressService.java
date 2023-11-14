@@ -75,7 +75,7 @@ public class AddressService {
 
         if (zipCode.trim().length() != 8) {
 
-            throw new RuntimeException("Please insert a valid zip code!");
+            throw new  RuntimeException("Please insert a valid zip code!");
         }
 
 

@@ -1,6 +1,7 @@
 package br.org.LibraryManagement;
 
 
+import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO;
 
 import br.org.LibraryManagement.domain.model.address.AddressModel;
@@ -9,12 +10,18 @@ import br.org.LibraryManagement.util.JPAUtil;
 
 import javax.persistence.*;
 
+import static br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO.showAllAddress;
+
 
 public class Main {
     public static void main(String[] args) {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        AddressModel addressModel = AddressService.createAddress();
-        System.out.println(addressModel.toString());
+        AddressDAO addressDAO = new AddressDAO(entityManager);
+//        addressDAO.insert();
+//        showAllAddress();
+        addressDAO.editAddress();
+
+
 //        BooksDAO booksDAO = new BooksDAO(entityManager);
 ////        booksDAO.insert();
 ////        booksDAO.showAllBooks();
