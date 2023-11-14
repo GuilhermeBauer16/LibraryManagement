@@ -1,4 +1,4 @@
-package br.org.LibraryManagement.domain.model.DAO;
+package br.org.LibraryManagement.domain.model.DAO.BooksDAO;
 
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
@@ -42,7 +42,7 @@ public class BooksDAO {
         }
     }
 
-    public static BooksModel findId() {
+    public static BooksModel findByBookId() {
         long id = CreateParameter.createLong("Type the ID: ");
         BooksModel findIdBook = null;
         try {
@@ -57,7 +57,7 @@ public class BooksDAO {
     }
 
     public static void editBook() {
-        BooksModel editBook = BookService.editBook(findId());
+        BooksModel editBook = BookService.editBook(findByBookId());
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(editBook);
@@ -71,7 +71,7 @@ public class BooksDAO {
 
     public void deleteBook(){
         showAllBooks();
-        BooksModel bookId =  findId();
+        BooksModel bookId =  findByBookId();
         try{
             entityManager.getTransaction().begin();
             entityManager.remove(bookId);

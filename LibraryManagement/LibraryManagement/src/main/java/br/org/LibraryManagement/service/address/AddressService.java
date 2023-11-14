@@ -12,10 +12,11 @@ public class AddressService {
         String zipCode = CreateParameter.createString("Zip code: ");
         checkZipCode(zipCode);
         String number = CreateParameter.createString("Number: ");
+        String state = CreateParameter.createString("State: ");
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
 
-        AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number, city, complement);
+        AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number,state, city, complement);
 
         return addressModel;
     }
@@ -27,6 +28,7 @@ public class AddressService {
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
         String number = CreateParameter.createString("Number: ");
+        String state = CreateParameter.createString("State: ");
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
 
@@ -48,6 +50,10 @@ public class AddressService {
             addressModel.setNumber(number);
         }
 
+        if (!state.isEmpty()) {
+            addressModel.setState(state);
+        }
+
         if (!city.isEmpty()) {
             addressModel.setCity(city);
         }
@@ -67,9 +73,9 @@ public class AddressService {
 
             throw new RuntimeException("Please type only digits!");
 
-        if (zipCode.length() != 8) {
+        if (zipCode.trim().length() != 8) {
 
-            new RuntimeException("Please insert a valid zip code!");
+            throw new RuntimeException("Please insert a valid zip code!");
         }
 
 

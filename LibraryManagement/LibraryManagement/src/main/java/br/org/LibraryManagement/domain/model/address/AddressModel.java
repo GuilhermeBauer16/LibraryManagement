@@ -5,21 +5,32 @@ import br.org.LibraryManagement.util.CreateParameter;
 import static br.org.LibraryManagement.service.address.AddressService.checkZipCode;
 
 public class AddressModel {
-
+    private long id;
     private String street;
     private String neighborhood;
     private String zip_code;
     private String number;
+
+    private String state;
     private String city;
     private String complement;
 
-    public AddressModel(String street, String neighborhood, String zip_code, String number, String city, String complement) {
+    public AddressModel(String street, String neighborhood, String zip_code, String number,String state, String city, String complement) {
         this.street = street;
         this.neighborhood = neighborhood;
         this.zip_code = zip_code;
         this.number = number;
+        this.state = state;
         this.city = city;
         this.complement = complement;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getStreet() {
@@ -71,19 +82,10 @@ public class AddressModel {
     }
 
 
-    public static void testCreateAddress(){
-        String street = CreateParameter.createString("Street: ");
-        String neighborhood = CreateParameter.createString("Neighborhood: ");
-        String zipCode = CreateParameter.createString("Zip code: ");
-        checkZipCode(zipCode);
-        String number = CreateParameter.createString("Number: ");
-        String city = CreateParameter.createString("City: ");
-        String complement = CreateParameter.createString("Complement: ");
-    }
-
     @Override
     public String toString() {
-        return "Address{" +
+        return "Address{ " +
+                "id " + id +
                 "street='" + street + '\'' +
                 ", neighborhood='" + neighborhood + '\'' +
                 ", zip_code='" + zip_code + '\'' +
