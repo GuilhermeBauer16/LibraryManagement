@@ -2,10 +2,13 @@ package br.org.LibraryManagement;
 
 
 import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
+import br.org.LibraryManagement.domain.model.DAO.BankDAO.BankDAO;
 import br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO;
 
 import br.org.LibraryManagement.domain.model.address.AddressModel;
+import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.service.address.AddressService;
+import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.JPAUtil;
 
 import javax.persistence.*;
@@ -17,11 +20,13 @@ public class Main {
     public static void main(String[] args) {
         EntityManager entityManager = JPAUtil.getEntityManager();
         AddressDAO addressDAO = new AddressDAO(entityManager);
-//        addressDAO.insert();
-//        showAllAddress();
-        addressDAO.editAddress();
+        BankDAO bankDAO = new BankDAO(entityManager);
 
-
+        BankModel bankModel = BankService.createBank();
+        bankDAO.insert();
+        bankDAO.editBank();
+        bankDAO.deleteBank();
+        System.out.println(bankModel.toString());
 //        BooksDAO booksDAO = new BooksDAO(entityManager);
 ////        booksDAO.insert();
 ////        booksDAO.showAllBooks();

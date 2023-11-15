@@ -1,10 +1,20 @@
 package br.org.LibraryManagement.domain.model.bank;
 
-public class BankModel {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "bank_accounts")
+public class BankModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String accountNumber;
 
     private double balance;
+
+
+    public BankModel() {
+    }
 
     public BankModel(String accountNumber) {
         this.accountNumber = accountNumber;
