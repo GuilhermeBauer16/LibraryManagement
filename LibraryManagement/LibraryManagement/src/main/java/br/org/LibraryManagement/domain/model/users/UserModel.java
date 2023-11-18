@@ -6,21 +6,36 @@ import br.org.LibraryManagement.util.CreateParameter;
 
 import javax.persistence.*;
 
-//@Entity(name= "user_library")
-//@Table(name = "users")
+@Entity
+@Table(name = "users")
+
 public class UserModel {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
 
     private String email;
-
+    @ManyToOne
+    @JoinColumn(name = "address_id")
     private AddressModel addressModel;
 
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
     private BankModel bankModel;
 
+    public UserModel() {
+    }
+
+    public UserModel(String username, String password, String email, AddressModel addressModel, BankModel bankModel) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.addressModel = addressModel;
+        this.bankModel = bankModel;
+    }
 
     public UserModel(String username, String password, String email) {
         this.username = username;
@@ -28,17 +43,6 @@ public class UserModel {
         this.email = email;
     }
 
-    public UserModel(AddressModel addressModel, BankModel bankModel) {
-        this.username = CreateParameter.createString("Name: ");
-        this.password = CreateParameter.createString("Email: ");
-        this.email = CreateParameter.createString("Password: ");
-        this.addressModel = addressModel;
-        this.bankModel = bankModel;
-
-
-
-
-    }
 
     @Override
     public String toString() {
@@ -46,8 +50,8 @@ public class UserModel {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + addressModel +
-                ", bank=" + bankModel +
+                ", address=" + addressModel.toString() +
+                ", bank=" + bankModel.toString() +
                 '}';
     }
 

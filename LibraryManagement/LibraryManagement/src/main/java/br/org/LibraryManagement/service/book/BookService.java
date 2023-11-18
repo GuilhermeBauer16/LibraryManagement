@@ -2,7 +2,10 @@ package br.org.LibraryManagement.service.book;
 
 import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
+import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.util.CreateParameter;
+
+import static br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO.findBookByName;
 
 public class BookService {
 
@@ -76,5 +79,22 @@ public class BookService {
         }
         return  false;
     }
+
+    public static UserModel buyTheBook(UserModel userModel) throws Exception {
+
+        BooksModel booksModel = findBookByName();
+        double accountBalance = userModel.getBank().getBalance();
+        double bookPrice = booksModel.getPrice();
+        if (accountBalance < bookPrice) {
+            throw new RuntimeException("Sorry but you don't have money on your account for buy this book!");
+        }
+
+        double result = accountBalance - bookPrice;
+        userModel.getBank().setBalance(result);
+        return userModel;
+
+
+    }
+
 }
 

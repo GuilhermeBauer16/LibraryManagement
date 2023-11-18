@@ -12,14 +12,26 @@ public class BankModel {
 
     private double balance;
 
+    private String name;
 
     public BankModel() {
     }
 
-    public BankModel(String accountNumber) {
+    public BankModel(String accountNumber, String name) {
         this.accountNumber = accountNumber;
+        this.name = name;
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
     public String getAccountNumber() {
         return accountNumber;

@@ -3,17 +3,14 @@ package br.org.LibraryManagement;
 
 import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.DAO.BankDAO.BankDAO;
-import br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO;
-
-import br.org.LibraryManagement.domain.model.address.AddressModel;
-import br.org.LibraryManagement.domain.model.bank.BankModel;
-import br.org.LibraryManagement.service.address.AddressService;
-import br.org.LibraryManagement.service.bank.BankService;
+import br.org.LibraryManagement.domain.model.DAO.userDAO.UserDAO;
+import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.service.user.UserService;
+import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.JPAUtil;
 
 import javax.persistence.*;
 
-import static br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO.showAllAddress;
 
 
 public class Main {
@@ -21,31 +18,33 @@ public class Main {
         EntityManager entityManager = JPAUtil.getEntityManager();
         AddressDAO addressDAO = new AddressDAO(entityManager);
         BankDAO bankDAO = new BankDAO(entityManager);
+        UserDAO userDAO = new UserDAO(entityManager);
+        System.out.println("Login Page ");
+        System.out.println("[1] New user");
+        System.out.println("[2] Login");
+        int loginOption = CreateParameter.createInt("Type your option: ");
+        UserModel user;
 
+        while (true) {
 
-        bankDAO.insert();
-//        BankService.showAccountBalance(BankDAO.findBankModelByAccountNumber());
-        bankDAO.deposit();
-        bankDAO.withdraw();
+            if (loginOption == 1) {
+                userDAO.insert(UserService.createUser(addressDAO, bankDAO));
+                System.out.println("Your user has registered with successful!");
+                System.out.println("Please make a login ");
+                user = userDAO.checkUserLogin();
+                break;
+            }
+            if (loginOption == 2) {
+                user = userDAO.checkUserLogin();
+                break;
+            }
 
+            System.out.println("Please type a valid option!");
+        }
+         bankDAO.deposit(user.getBank());
+        LibraryMain libraryMain = new LibraryMain(entityManager,user);
+        libraryMain.startLibrary();
 
-//        System.out.println(bankModel.toString());
-//        BooksDAO booksDAO = new BooksDAO(entityManager);
-////        booksDAO.insert();
-////        booksDAO.showAllBooks();
-////        booksDAO.editBook();
-////        booksDAO.showAllBooks();
-////        booksDAO.findByCategory();
-//        booksDAO.deleteBook();
-//        entityManager.getTransaction().begin();
-//        booksDAO.insert();
-//        entityManager.getTransaction().commit();
-//        BooksModel book = BookService.createBook();
-//        System.out.println(book.toString());
-//        B ank bank = BankService.createBank();
-//        System.out.println(bank.toString());
-//        Bank bankEdit = BankService.editBankAccount(bank);
-//        System.out.println(bank.toString());
 
     }
 }

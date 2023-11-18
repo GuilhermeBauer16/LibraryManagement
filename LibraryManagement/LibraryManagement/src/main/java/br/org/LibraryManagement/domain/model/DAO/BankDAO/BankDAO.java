@@ -1,6 +1,7 @@
 package br.org.LibraryManagement.domain.model.DAO.BankDAO;
 
 import br.org.LibraryManagement.domain.model.bank.BankModel;
+import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
 
@@ -15,17 +16,20 @@ public class BankDAO {
         this.entityManager = entityManager;
     }
 
-    public void insert() {
+    public BankModel insert() {
 
-        BankModel bank = BankService.createBank();
+
         try {
+            BankModel bank = BankService.createBank();
             entityManager.getTransaction().begin();
             entityManager.persist(bank);
             entityManager.getTransaction().commit();
+            return bank;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw new RuntimeException("Error to create a bank account " + ex.getMessage() + ex);
         }
+
     }
 
 
@@ -92,13 +96,14 @@ public class BankDAO {
         }
     }
 
-    public void deposit() throws Exception {
+    public BankModel deposit(BankModel bankModel) throws Exception {
         try {
 
-            BankModel depositInTheAccount = BankService.deposit(findBankModelByAccountNumber());
+            BankModel depositInTheAccount = BankService.deposit(bankModel);
             entityManager.getTransaction().begin();
             entityManager.merge(depositInTheAccount);
             entityManager.getTransaction().commit();
+            return  depositInTheAccount;
 
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();

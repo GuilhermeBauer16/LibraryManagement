@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 public class BankService {
 
     public static BankModel createBank() {
-
+        String name = CreateParameter.createString("Name: ");
         String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
         System.out.println(checkAccountNumber);
         System.out.println("Please write these numbers because they will be used in the future.");
-        return new BankModel(checkAccountNumber);
+        return new BankModel(checkAccountNumber, name);
 
     }
 
@@ -34,7 +34,6 @@ public class BankService {
     public static BankModel deposit(BankModel bankModel) {
 
         checkDigitAccountNumber(bankModel.getAccountNumber());
-//        checkAccountNumberIsEqual(bankModel);
         showAccountBalance(bankModel);
         double valueToDeposit = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
 
@@ -79,15 +78,6 @@ public class BankService {
         }
         return accountNumber;
     }
-
-//    public static void checkAccountNumberIsEqual(BankModel bankModel) {
-//
-//
-//        checkDigitAccountNumber(accountNumber);
-//        if (!bankModel.getAccountNumber().equals(accountNumber)) {
-//            throw new RuntimeException("The account number is wrong!");
-//        }
-//    }
 
     public static void showAccountBalance(BankModel bankModel) {
 

@@ -17,20 +17,20 @@ public class AddressDAO {
         this.entityManager = entityManager;
     }
 
-    public void insert() {
-
-        AddressModel address = AddressService.createAddress();
+    public AddressModel insert() {
 
         try {
+            AddressModel address = AddressService.createAddress();
             entityManager.getTransaction().begin();
             entityManager.persist(address);
             entityManager.getTransaction().commit();
+            return address;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw new RuntimeException("Have a error for create this address " + ex.getMessage(), ex);
 
-
         }
+
 
 
     }

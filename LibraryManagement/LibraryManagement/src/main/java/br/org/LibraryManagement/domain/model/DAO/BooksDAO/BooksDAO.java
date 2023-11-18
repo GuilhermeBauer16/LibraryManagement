@@ -2,6 +2,7 @@ package br.org.LibraryManagement.domain.model.DAO.BooksDAO;
 
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
+import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.book.BookService;
 import br.org.LibraryManagement.util.CreateParameter;
 
@@ -96,6 +97,43 @@ public class BooksDAO {
         for(BooksModel book : books){
             System.out.println(book.toString());
         }
+    }
+
+    public static BooksModel findBookByName() throws Exception {
+
+        BooksModel booksModel;
+
+        try {
+            String jpql = "SELECT BM FROM BooksModel BM WHERE BM.name = :name";
+            TypedQuery<BooksModel> query = entityManager.createQuery(jpql,BooksModel.class);
+            String bookName = CreateParameter.createString("Type the book name: ");
+            query.setParameter("name",bookName);
+            booksModel = query.getSingleResult();
+        }catch (Exception ex){
+
+            entityManager.getTransaction().rollback();
+            throw  new Exception("The book name has not found" + ex.getMessage());
+        }
+
+        return booksModel;
+
+    }
+
+    public void buyTheBook(UserModel userModel) throws Exception {
+
+        UserModel user = BookService.buyTheBook(userModel);
+
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.getTransaction().commit();
+        }catch (Exception ex){
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("Have a error into buy a book" + ex.getMessage());
+        }
+
+
+
     }
 
     public void closeConnection() {
