@@ -17,16 +17,19 @@ import static br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO.sh
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         EntityManager entityManager = JPAUtil.getEntityManager();
         AddressDAO addressDAO = new AddressDAO(entityManager);
         BankDAO bankDAO = new BankDAO(entityManager);
 
-        BankModel bankModel = BankService.createBank();
+
         bankDAO.insert();
-        bankDAO.editBank();
-        bankDAO.deleteBank();
-        System.out.println(bankModel.toString());
+//        BankService.showAccountBalance(BankDAO.findBankModelByAccountNumber());
+        bankDAO.deposit();
+        bankDAO.withdraw();
+
+
+//        System.out.println(bankModel.toString());
 //        BooksDAO booksDAO = new BooksDAO(entityManager);
 ////        booksDAO.insert();
 ////        booksDAO.showAllBooks();

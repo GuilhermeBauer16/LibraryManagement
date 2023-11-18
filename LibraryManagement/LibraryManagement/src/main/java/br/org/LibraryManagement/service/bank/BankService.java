@@ -31,34 +31,39 @@ public class BankService {
 
     }
 
-    public static void deposit(BankModel bankModel, double value) {
+    public static BankModel deposit(BankModel bankModel) {
 
         checkDigitAccountNumber(bankModel.getAccountNumber());
-        checkAccountNumberIsEqual(bankModel);
+//        checkAccountNumberIsEqual(bankModel);
+        showAccountBalance(bankModel);
+        double valueToDeposit = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
 
-        if (value > 0) {
+        if (valueToDeposit > 0) {
             double balance = bankModel.getBalance();
-            double deposit = balance + value;
+            double deposit = balance + valueToDeposit;
             bankModel.setBalance(deposit);
-            return;
+            return bankModel;
         }
         throw new RuntimeException("Please insert a value plus to 0");
 
     }
 
-    public static void withdraw(BankModel bankModel, double value) {
+    public static BankModel withdraw(BankModel bankModel) {
 
         checkDigitAccountNumber(bankModel.getAccountNumber());
-        checkAccountNumberIsEqual(bankModel);
-        if (value <= 0) {
+//        checkAccountNumberIsEqual(bankModel);
+        showAccountBalance(bankModel);
+        double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
+
+        if (valueToWithdraw <= 0) {
             throw new RuntimeException("Please insert a value plus to 0");
         }
 
         double balance = bankModel.getBalance();
-        if (balance >= value) {
-            double withdraw = balance - value;
+        if (balance >= valueToWithdraw) {
+            double withdraw = balance - valueToWithdraw;
             bankModel.setBalance(withdraw);
-            return;
+            return bankModel;
         }
 
         throw new RuntimeException("The account does not have sufficient balance ");
@@ -75,12 +80,19 @@ public class BankService {
         return accountNumber;
     }
 
-    public static void checkAccountNumberIsEqual(BankModel bankModel) {
+//    public static void checkAccountNumberIsEqual(BankModel bankModel) {
+//
+//
+//        checkDigitAccountNumber(accountNumber);
+//        if (!bankModel.getAccountNumber().equals(accountNumber)) {
+//            throw new RuntimeException("The account number is wrong!");
+//        }
+//    }
 
-        String accountNumber = CreateParameter.createString("Please type your account number: ");
-        checkDigitAccountNumber(accountNumber);
-        if (!bankModel.getAccountNumber().equals(accountNumber)) {
-            throw new RuntimeException("The account number is wrong!");
-        }
+    public static void showAccountBalance(BankModel bankModel) {
+
+        System.out.println("=".repeat(30));
+        System.out.println("Balance: " + bankModel.getBalance());
+        System.out.println("=".repeat(30));
     }
 }

@@ -33,21 +33,25 @@ public class BankDAO {
         BankModel bank = null;
 
         try {
-            String jpql = "SELECT BA FROM BankModel BA WHERE BA.accountNumber: :accountNumber";
-            long bankAccountNumber = CreateParameter.createLong("type the account number: ");
+            String jpql = "SELECT BA FROM BankModel BA WHERE BA.accountNumber = :accountNumber";
+            String bankAccountNumber = CreateParameter.createString("type the account number: ");
             TypedQuery<BankModel> query = entityManager.createQuery(jpql, BankModel.class);
-            bank = (BankModel) query.setParameter("accountNumber", bankAccountNumber);
+            query.setParameter("accountNumber", bankAccountNumber);
+            bank = query.getSingleResult();
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            entityManager.getTransaction().rollback();
+            System.out.println("error to find this account number "+ ex.getMessage());
         }
 
         return bank;
     }
 
     public void editBank() {
-        BankModel bankModel = findBankModelByAccountNumber();
+
         try {
+
+            System.out.println("Edit account!");
             entityManager.getTransaction().begin();
             entityManager.merge(BankService.editBankAccount(findBankModelByAccountNumber()));
             entityManager.getTransaction().commit();
@@ -58,18 +62,50 @@ public class BankDAO {
         }
 
     }
-    public void deleteBank(){
 
-        try{
+    public void deleteBank() {
+
+        try {
+            System.out.println("Delete account!");
             entityManager.getTransaction().begin();
             entityManager.remove(findBankModelByAccountNumber());
             entityManager.getTransaction().commit();
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
             entityManager.getTransaction().rollback();
             throw new RuntimeException("Error to delete the bank account " + ex.getMessage() + ex);
         }
     }
+
+    public void withdraw() throws Exception {
+        try {
+
+            BankModel withdrawOfTheAccount = BankService.withdraw(findBankModelByAccountNumber());
+            entityManager.getTransaction().begin();
+            entityManager.merge(withdrawOfTheAccount);
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("have a error in the trying to withdraw! " + ex.getMessage());
+
+        }
+    }
+
+    public void deposit() throws Exception {
+        try {
+
+            BankModel depositInTheAccount = BankService.deposit(findBankModelByAccountNumber());
+            entityManager.getTransaction().begin();
+            entityManager.merge(depositInTheAccount);
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Have a error in to deposit a value! " + ex.getMessage());
+        }
+    }
+
 }
 
 
