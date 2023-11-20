@@ -1,4 +1,4 @@
-package br.org.LibraryManagement.domain.model.DAO.BooksDAO;
+package br.org.LibraryManagement.DAO.BooksDAO;
 
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.books.BooksModel;

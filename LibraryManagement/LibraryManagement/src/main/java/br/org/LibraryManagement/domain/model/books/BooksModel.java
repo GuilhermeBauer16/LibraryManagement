@@ -102,11 +102,10 @@ public class BooksModel {
     @Override
     public String toString() {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
-        return "Books" +
-                "id " + id + " " +
-                "name: '" + name + '\'' +
-                ", description: '" + description + '\'' +
-                ", price: " + numberFormat.format(price) +
+        return "Books" + "\n" +
+                "name: '" + name + '\'' + "\n" +
+                ", description: '" + description + '\'' + "\n" +
+                ", price: " + numberFormat.format(price) + "\n" +
                 ", booksCategory: " + booksCategory
                 ;
     }

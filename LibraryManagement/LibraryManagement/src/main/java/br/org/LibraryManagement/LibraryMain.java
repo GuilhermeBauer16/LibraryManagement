@@ -1,6 +1,6 @@
 package br.org.LibraryManagement;
 
-import br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO;
+import br.org.LibraryManagement.DAO.BooksDAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;

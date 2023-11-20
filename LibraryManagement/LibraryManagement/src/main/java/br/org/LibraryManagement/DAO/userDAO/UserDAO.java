@@ -1,4 +1,4 @@
-package br.org.LibraryManagement.domain.model.DAO.userDAO;
+package br.org.LibraryManagement.DAO.userDAO;
 
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.LoginNotFoundException;

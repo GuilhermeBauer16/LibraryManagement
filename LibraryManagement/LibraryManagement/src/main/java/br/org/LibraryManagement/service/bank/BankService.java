@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class BankService {
 
     public static BankModel createBank() {
+        System.out.println("Bank Account");
         String name = CreateParameter.createString("Name: ");
         String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
         System.out.println(checkAccountNumber);

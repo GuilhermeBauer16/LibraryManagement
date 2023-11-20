@@ -1,17 +1,15 @@
 package br.org.LibraryManagement;
 
 
-import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
-import br.org.LibraryManagement.domain.model.DAO.BankDAO.BankDAO;
-import br.org.LibraryManagement.domain.model.DAO.userDAO.UserDAO;
+import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
+import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
+import br.org.LibraryManagement.DAO.userDAO.UserDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.JPAUtil;
-
 import javax.persistence.*;
-
-
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -41,7 +39,8 @@ public class Main {
 
             System.out.println("Please type a valid option!");
         }
-         bankDAO.deposit(user.getBank());
+        AddressService.showUserAddress(user);
+        bankDAO.deposit(user.getBank());
         LibraryMain libraryMain = new LibraryMain(entityManager,user);
         libraryMain.startLibrary();
 

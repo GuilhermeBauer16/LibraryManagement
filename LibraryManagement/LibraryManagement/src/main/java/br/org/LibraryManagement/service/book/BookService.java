@@ -5,7 +5,7 @@ import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
-import static br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO.findBookByName;
+import static br.org.LibraryManagement.DAO.BooksDAO.BooksDAO.findBookByName;
 
 public class BookService {
 

@@ -1,4 +1,4 @@
-package br.org.LibraryManagement.domain.model.DAO.BankDAO;
+package br.org.LibraryManagement.DAO.BankDAO;
 
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
@@ -51,14 +51,15 @@ public class BankDAO {
         return bank;
     }
 
-    public void editBank() {
+    public BankModel editBank(BankModel bankModel) {
 
         try {
 
             System.out.println("Edit account!");
             entityManager.getTransaction().begin();
-            entityManager.merge(BankService.editBankAccount(findBankModelByAccountNumber()));
+            entityManager.merge(BankService.editBankAccount(bankModel));
             entityManager.getTransaction().commit();
+            return bankModel;
         } catch (Exception ex) {
 
             entityManager.getTransaction().rollback();

@@ -1,7 +1,7 @@
 package br.org.LibraryManagement.service.user;
 
-import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
-import br.org.LibraryManagement.domain.model.DAO.BankDAO.BankDAO;
+import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
+import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
 import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
@@ -12,13 +12,12 @@ import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UserService {
 
     public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailIsNotValid {
-
+        System.out.println("New User");
         String username = CreateParameter.createString("Name: ");
         String password = CreateParameter.createString("Password: ");
         String email = CreateParameter.createString("Email: ");
@@ -29,30 +28,16 @@ public class UserService {
 
     }
 
-    public static UserModel editUser(UserModel userModel) {
+    public static UserModel editUser(UserModel userModel, BankDAO bankDAO, AddressDAO addressDAO) {
+        System.out.println("Edit User ");
+        String username = CreateParameter.createString("Name: ");
+        bankDAO.editBank(userModel.getBank());
+        addressDAO.editAddress(userModel.getAddress());
 
-        if (userModel.getUsername() != null) {
-            String username = CreateParameter.createString("Name: ");
+        if (!username.isEmpty()) {
+
             userModel.setUsername(username);
         }
-
-        if (userModel.getEmail() != null) {
-            String email = CreateParameter.createString("Email: ");
-            userModel.setEmail(email);
-        }
-        if (userModel.getPassword() != null) {
-            String password = CreateParameter.createString("Password: ");
-            userModel.setPassword(password);
-        }
-
-        if (userModel.getAddress() != null) {
-            AddressModel addressModel = AddressService.editAddress(userModel.getAddress());
-            userModel.setAddress(addressModel);
-        }
-
-        ////    if (userModel.getBank() != null) {
-        BankModel bankModel = BankService.editBankAccount(userModel.getBank());
-        userModel.setBank(bankModel);
 
         return userModel;
     }

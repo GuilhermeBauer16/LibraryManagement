@@ -52,6 +52,7 @@ public class BankModel {
     @Override
     public String toString() {
         return "Bank" + "\n" +
+                 "name= " + name + "\n" +
                 "accountNumber= '" + accountNumber + '\'' + "\n" +
                 ", balance=" + balance + "\n"
                 ;

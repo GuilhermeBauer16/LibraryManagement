@@ -1,12 +1,14 @@
 package br.org.LibraryManagement.service.address;
 
 import br.org.LibraryManagement.domain.model.address.AddressModel;
+import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
 public class AddressService {
 
 
     public static AddressModel createAddress() {
+        System.out.println("Address");
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
@@ -16,7 +18,7 @@ public class AddressService {
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
 
-        AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number,state, city, complement);
+        AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number, state, city, complement);
 
         return addressModel;
     }
@@ -24,6 +26,7 @@ public class AddressService {
 
     public static AddressModel editAddress(AddressModel addressModel) {
 
+        System.out.println("Edit Address");
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
@@ -67,6 +70,10 @@ public class AddressService {
 
     }
 
+    public static void showUserAddress(UserModel addressModel){
+        System.out.println(addressModel.toString());
+    }
+
     public static void checkZipCode(String zipCode) {
 
         if (!zipCode.matches(".*\\d+.*"))
@@ -75,7 +82,7 @@ public class AddressService {
 
         if (zipCode.trim().length() != 8) {
 
-            throw new  RuntimeException("Please insert a valid zip code!");
+            throw new RuntimeException("Please insert a valid zip code!");
         }
 
 
