@@ -1,7 +1,11 @@
 package br.org.LibraryManagement.domain.model.books;
 
+import br.org.LibraryManagement.domain.model.users.UserModel;
+
 import javax.persistence.*;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -17,11 +21,14 @@ public class BooksModel {
 
     private double quantity;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "book_category")
+
+
+        @Enumerated(EnumType.STRING)
+        @Column(name = "book_category")
     private BooksCategory booksCategory;
 
-//    private PaymentMethod paymentMethod;
+    @ManyToMany(mappedBy = "books")
+    private List<UserModel> users =new ArrayList<>();
 
 
     public BooksModel() {
@@ -82,6 +89,15 @@ public class BooksModel {
 //    public void setPaymentMethod(PaymentMethod paymentMethod) {
 //        this.paymentMethod = paymentMethod;
 //    }
+
+
+    public List<UserModel> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserModel> users) {
+        this.users = users;
+    }
 
     @Override
     public String toString() {

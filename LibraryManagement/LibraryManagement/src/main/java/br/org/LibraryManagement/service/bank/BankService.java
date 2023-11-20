@@ -19,12 +19,15 @@ public class BankService {
     }
 
     public static BankModel editBankAccount(BankModel bankModel) {
-
+        String name = CreateParameter.createString("Name: ");
         String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
         System.out.println(checkAccountNumber);
         System.out.println("Please write these numbers because they will be used in the future.");
         checkDigitAccountNumber(checkAccountNumber);
         bankModel.setAccountNumber(checkAccountNumber);
+        if(!name.isEmpty()){
+            bankModel.setName(name);
+        }
 
 
         return bankModel;

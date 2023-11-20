@@ -91,6 +91,7 @@ public class BookService {
 
         double result = accountBalance - bookPrice;
         userModel.getBank().setBalance(result);
+        userModel.addBook(booksModel);
         return userModel;
 
 

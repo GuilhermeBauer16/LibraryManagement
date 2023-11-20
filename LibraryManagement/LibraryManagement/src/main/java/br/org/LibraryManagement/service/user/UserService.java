@@ -4,6 +4,7 @@ import br.org.LibraryManagement.domain.model.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.DAO.BankDAO.BankDAO;
 import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.bank.BankModel;
+import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.EmailIsNotValid;
 import br.org.LibraryManagement.service.address.AddressService;
@@ -12,6 +13,7 @@ import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class UserService {
 
@@ -27,7 +29,7 @@ public class UserService {
 
     }
 
-    public static void editUser(UserModel userModel) {
+    public static UserModel editUser(UserModel userModel) {
 
         if (userModel.getUsername() != null) {
             String username = CreateParameter.createString("Name: ");
@@ -48,19 +50,29 @@ public class UserService {
             userModel.setAddress(addressModel);
         }
 
-        if (userModel.getBank() != null) {
-            BankModel bankModel = BankService.editBankAccount(userModel.getBank());
-            userModel.setBank(bankModel);
-        }
+        ////    if (userModel.getBank() != null) {
+        BankModel bankModel = BankService.editBankAccount(userModel.getBank());
+        userModel.setBank(bankModel);
 
+        return userModel;
     }
 
+
     public static String checkUserEmail(String email) throws EmailIsNotValid {
-        if(!EmailCheck.isValidEmail(email)){
+        if (!EmailCheck.isValidEmail(email)) {
             throw new EmailIsNotValid("Please type a valid email", " Maybe the user don't type the @");
         }
         return email;
     }
 
+    public static void showUserBooks(UserModel userModel) {
+        List<BooksModel> books = userModel.getBooks();
 
+        for (BooksModel book : books) {
+
+            System.out.println(book.toString());
+
+
+        }
+    }
 }

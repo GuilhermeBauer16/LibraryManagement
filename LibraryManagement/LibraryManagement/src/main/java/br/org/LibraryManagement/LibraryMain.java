@@ -2,6 +2,7 @@ package br.org.LibraryManagement;
 
 import br.org.LibraryManagement.domain.model.DAO.BooksDAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 
 import javax.persistence.EntityManager;
@@ -49,7 +50,10 @@ public class LibraryMain {
                 booksDAO.buyTheBook(userModel);
             }
 
-            System.out.println("Please chat ");
+            if (libraryMenuOptions == 4){
+
+                UserService.showUserBooks(userModel);
+            }
         }
     }
 

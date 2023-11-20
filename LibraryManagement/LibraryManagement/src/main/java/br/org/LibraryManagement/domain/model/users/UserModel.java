@@ -2,9 +2,12 @@ package br.org.LibraryManagement.domain.model.users;
 
 import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.bank.BankModel;
+import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.util.CreateParameter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -25,6 +28,12 @@ public class UserModel {
     @ManyToOne
     @JoinColumn(name = "bank_id")
     private BankModel bankModel;
+
+    @ManyToMany
+    @JoinTable(name= "user_books",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<BooksModel> books = new ArrayList<>();
 
     public UserModel() {
     }
@@ -52,7 +61,13 @@ public class UserModel {
                 ", email='" + email + '\'' +
                 ", address=" + addressModel.toString() +
                 ", bank=" + bankModel.toString() +
-                '}';
+                ", Books= " + books.toString() +
+        '}';
+    }
+
+    public void addBook(BooksModel book){
+        books.add(book);
+        book.getUsers().add(this);
     }
 
     public String getUsername() {
@@ -93,5 +108,29 @@ public class UserModel {
 
     public void setBank(BankModel bankModel) {
         this.bankModel = bankModel;
+    }
+
+    public AddressModel getAddressModel() {
+        return addressModel;
+    }
+
+    public void setAddressModel(AddressModel addressModel) {
+        this.addressModel = addressModel;
+    }
+
+    public BankModel getBankModel() {
+        return bankModel;
+    }
+
+    public void setBankModel(BankModel bankModel) {
+        this.bankModel = bankModel;
+    }
+
+    public List<BooksModel> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<BooksModel> books) {
+        this.books = books;
     }
 }
