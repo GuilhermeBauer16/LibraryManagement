@@ -70,8 +70,8 @@ public class AddressService {
 
     }
 
-    public static void showUserAddress(UserModel addressModel){
-        System.out.println(addressModel.toString());
+    public static String showUserAddress(AddressModel addressModel){
+        return addressModel.toString();
     }
 
     public static void checkZipCode(String zipCode) {

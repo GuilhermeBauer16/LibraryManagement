@@ -6,7 +6,7 @@ public class EmailIsNotValid extends Exception{
     private String description;
 
     public EmailIsNotValid(String message, String description) {
-        super(message);
+        super(message + ": " + description);
         this.message = message;
         this.description = description;
     }

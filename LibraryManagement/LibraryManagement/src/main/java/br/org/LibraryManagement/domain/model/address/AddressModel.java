@@ -94,14 +94,14 @@ public class AddressModel {
 
     @Override
     public String toString() {
-        return "Address{ " +
-                "id " + id +
-                "street='" + street + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
-                ", zip_code='" + zip_code + '\'' +
-                ", number='" + number + '\'' +
-                ", city='" + city + '\'' +
-                ", complement='" + complement + '\'' +
-                '}';
+        return "Address " + "\n" +
+
+                "street='" + street + '\'' + "\n" +
+                ", neighborhood='" + neighborhood + '\'' + "\n" +
+                ", zip_code='" + zip_code + '\'' + "\n" +
+                ", number='" + number + '\'' + "\n" +
+                ", city='" + city + '\'' + "\n" +
+                ", complement='" + complement + '\'' + "\n"
+                ;
     }
 }

@@ -33,24 +33,6 @@ public class BankDAO {
     }
 
 
-    public static BankModel findBankModelByAccountNumber() {
-        BankModel bank = null;
-
-        try {
-            String jpql = "SELECT BA FROM BankModel BA WHERE BA.accountNumber = :accountNumber";
-            String bankAccountNumber = CreateParameter.createString("type the account number: ");
-            TypedQuery<BankModel> query = entityManager.createQuery(jpql, BankModel.class);
-            query.setParameter("accountNumber", bankAccountNumber);
-            bank = query.getSingleResult();
-
-        } catch (Exception ex) {
-            entityManager.getTransaction().rollback();
-            System.out.println("error to find this account number "+ ex.getMessage());
-        }
-
-        return bank;
-    }
-
     public BankModel editBank(BankModel bankModel) {
 
         try {
@@ -68,28 +50,16 @@ public class BankDAO {
 
     }
 
-    public void deleteBank() {
 
-        try {
-            System.out.println("Delete account!");
-            entityManager.getTransaction().begin();
-            entityManager.remove(findBankModelByAccountNumber());
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
 
-            entityManager.getTransaction().rollback();
-            throw new RuntimeException("Error to delete the bank account " + ex.getMessage() + ex);
-        }
-    }
-
-    public void withdraw() throws Exception {
+    public BankModel withdraw(BankModel bankModel) throws Exception {
         try {
 
-            BankModel withdrawOfTheAccount = BankService.withdraw(findBankModelByAccountNumber());
+            BankModel withdrawOfTheAccount = BankService.withdraw(bankModel);
             entityManager.getTransaction().begin();
             entityManager.merge(withdrawOfTheAccount);
             entityManager.getTransaction().commit();
-
+            return bankModel;
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw new Exception("have a error in the trying to withdraw! " + ex.getMessage());

@@ -5,7 +5,7 @@ public class LoginNotFoundException extends Exception {
     private String description;
 
     public LoginNotFoundException(String message, String description) {
-        super(message);
+        super(message + ": " + description);
         this.message = message;
         this.description = description;
     }

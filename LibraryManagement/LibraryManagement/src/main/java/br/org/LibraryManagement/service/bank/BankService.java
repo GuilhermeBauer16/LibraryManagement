@@ -56,7 +56,7 @@ public class BankService {
         checkDigitAccountNumber(bankModel.getAccountNumber());
 //        checkAccountNumberIsEqual(bankModel);
         showAccountBalance(bankModel);
-        double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
+        double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to withdraw:$ ");
 
         if (valueToWithdraw <= 0) {
             throw new RuntimeException("Please insert a value plus to 0");
@@ -83,10 +83,14 @@ public class BankService {
         return accountNumber;
     }
 
-    public static void showAccountBalance(BankModel bankModel) {
+    public static double showAccountBalance(BankModel bankModel) {
 
-        System.out.println("=".repeat(30));
-        System.out.println("Balance: " + bankModel.getBalance());
-        System.out.println("=".repeat(30));
+
+        return bankModel.getBalance();
+
+    }
+
+    public static String showUserInformation(BankModel bankModel){
+        return  bankModel.toString();
     }
 }

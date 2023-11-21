@@ -5,10 +5,10 @@ import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
 import br.org.LibraryManagement.DAO.userDAO.UserDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
-import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.JPAUtil;
+
 import javax.persistence.*;
 
 public class Main {
@@ -40,7 +40,7 @@ public class Main {
             System.out.println("Please type a valid option!");
         }
 
-        while (true){
+        while (true) {
 
             System.out.println("Menu");
             System.out.println("[1]Enter in the Bauer Library");
@@ -50,15 +50,25 @@ public class Main {
             System.out.println("[5]Exit");
             int optionsMainMenu = CreateParameter.createInt("Choose the one option: ");
 
-            switch (optionsMainMenu){
+            switch (optionsMainMenu) {
                 case 1:
-                    LibraryMain libraryMain = new LibraryMain(entityManager,user);
+                    LibraryMain libraryMain = new LibraryMain(entityManager, user);
                     libraryMain.startLibrary();
                     break;
 
                 case 2:
-                    UserMain userMain = new UserMain(entityManager,user);
+                    UserMain userMain = new UserMain(entityManager, user);
                     userMain.startManagerUserMain();
+                    break;
+
+                case 3:
+                    BankMain bankMain = new BankMain(entityManager, user);
+                    bankMain.startBankMain();
+                    break;
+
+                case 4:
+                    AddressMain addressMain = new AddressMain(entityManager, user);
+                    addressMain.startAddressMain();
                     break;
 
                 case 5:
@@ -67,7 +77,6 @@ public class Main {
             }
 
         }
-
 
 
     }
