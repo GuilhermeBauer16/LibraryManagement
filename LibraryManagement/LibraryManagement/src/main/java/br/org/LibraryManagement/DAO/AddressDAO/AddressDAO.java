@@ -35,22 +35,22 @@ public class AddressDAO {
 
     }
 
-    public static AddressModel findByAddressId() {
-        long addressId = CreateParameter.createLong("Type a address id: ");
-        AddressModel addressModel = null;
-        try {
-            addressModel = entityManager.find(AddressModel.class, addressId);
-        } catch (Exception ex) {
-            entityManager.getTransaction().rollback();
-            System.out.println("error to find the id address! " + ex.getMessage());
-        }
-
-        return addressModel;
-
-    }
+//    public static AddressModel findByAddressId() {
+//        long addressId = CreateParameter.createLong("Type a address id: ");
+//        AddressModel addressModel = null;
+//        try {
+//            addressModel = entityManager.find(AddressModel.class, addressId);
+//        } catch (Exception ex) {
+//            entityManager.getTransaction().rollback();
+//            System.out.println("error to find the id address! " + ex.getMessage());
+//        }
+//
+//        return addressModel;
+//
+//    }
 
     public AddressModel editAddress(AddressModel addressModel) {
-//        showAllAddress();
+
         try {
 
             AddressModel editedAddress = AddressService.editAddress(addressModel);
@@ -65,17 +65,17 @@ public class AddressDAO {
         }
         return addressModel;
     }
-//    public void deleteAddress(){
-//        try {
-//            entityManager.getTransaction().begin();
-//            entityManager.remove(findByAddressId());
-//            entityManager.getTransaction().commit();
-//
-//        } catch (Exception ex) {
-//            entityManager.getTransaction().rollback();
-//            System.out.println("error to edit the address! " + ex.getMessage());
-//        }
-//    }
+    public void deleteAddress(AddressModel addressModel){
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(addressModel);
+            entityManager.getTransaction().commit();
+
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            System.out.println("error to edit the address! " + ex.getMessage());
+        }
+    }
 
 //    public static void showUserAddress(){
 ////        String jpql = "SELECT A FROM AddressModel A";

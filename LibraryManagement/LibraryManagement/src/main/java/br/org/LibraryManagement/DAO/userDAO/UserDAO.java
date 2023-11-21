@@ -1,5 +1,9 @@
 package br.org.LibraryManagement.DAO.userDAO;
 
+import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
+import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
+import br.org.LibraryManagement.domain.model.address.AddressModel;
+import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.LoginNotFoundException;
 import br.org.LibraryManagement.service.user.UserService;
@@ -55,6 +59,30 @@ public class UserDAO {
             throw new LoginNotFoundException("Error in do the login ", " Probable the user typed the email or password incorrect!  ");
         }
         return user;
+    }
+
+    public UserModel editUser(UserModel userModel) throws Exception {
+
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.merge(UserService.editUser(userModel));
+            entityManager.getTransaction().commit();
+            return userModel;
+        }catch (Exception ex){
+            entityManager.getTransaction().rollback();
+            throw new Exception("Have a error in edit the user! " + ex.getMessage());
+        }
+    }
+
+    public void deleteUser(UserModel userModel){
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(userModel);
+            entityManager.getTransaction().commit();
+        }catch (Exception ex){
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException("Have a error in delete the user!");
+        }
     }
 
     public String showUserDetails(UserModel userModel){

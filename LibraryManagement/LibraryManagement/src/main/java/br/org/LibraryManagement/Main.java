@@ -39,10 +39,35 @@ public class Main {
 
             System.out.println("Please type a valid option!");
         }
-        AddressService.showUserAddress(user);
-        bankDAO.deposit(user.getBank());
-        LibraryMain libraryMain = new LibraryMain(entityManager,user);
-        libraryMain.startLibrary();
+
+        while (true){
+
+            System.out.println("Menu");
+            System.out.println("[1]Enter in the Bauer Library");
+            System.out.println("[2]Manager the user");
+            System.out.println("[3]Manager the user Bank account");
+            System.out.println("[4]Manager the user Address");
+            System.out.println("[5]Exit");
+            int optionsMainMenu = CreateParameter.createInt("Choose the one option: ");
+
+            switch (optionsMainMenu){
+                case 1:
+                    LibraryMain libraryMain = new LibraryMain(entityManager,user);
+                    libraryMain.startLibrary();
+                    break;
+
+                case 2:
+                    UserMain userMain = new UserMain(entityManager,user);
+                    userMain.startManagerUserMain();
+                    break;
+
+                case 5:
+                    System.out.println("Exiting the system...");
+                    return;
+            }
+
+        }
+
 
 
     }

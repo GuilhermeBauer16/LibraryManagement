@@ -23,7 +23,6 @@ public class LibraryMain {
         BooksDAO booksDAO = new BooksDAO(entityManager);
 
 
-
         while (true) {
 
             System.out.println("Welcome to Bauer Library");
@@ -33,27 +32,36 @@ public class LibraryMain {
             System.out.println("[2]Filter book by category ");
             System.out.println("[3]Buy a book ");
             System.out.println("[4]See the book what you already bought ");
+            System.out.println("[5]Return to menu... ");
 
             int libraryMenuOptions = CreateParameter.createInt("Choose a option: ");
-            if (libraryMenuOptions == 1) {
 
-                booksDAO.showAllBooks();
+            switch (libraryMenuOptions) {
+                case 1:
+                    booksDAO.showAllBooks();
+                    break;
+
+                case 2:
+                    booksDAO.findByCategory();
+                    break;
+
+                case 3:
+                    booksDAO.buyTheBook(userModel);
+                    break;
+
+                case 4:
+                    UserService.showUserBooks(userModel);
+                    break;
+
+                case 5:
+                    System.out.println("Returning to menu! ");
+                    return;
+
+                default:
+                    System.out.println("Please type a valid option! ");
+                    break;
             }
 
-            if (libraryMenuOptions == 2) {
-
-                booksDAO.findByCategory();
-            }
-
-            if (libraryMenuOptions == 3){
-
-                booksDAO.buyTheBook(userModel);
-            }
-
-            if (libraryMenuOptions == 4){
-
-                UserService.showUserBooks(userModel);
-            }
         }
     }
 

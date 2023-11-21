@@ -28,11 +28,9 @@ public class UserService {
 
     }
 
-    public static UserModel editUser(UserModel userModel, BankDAO bankDAO, AddressDAO addressDAO) {
+    public static UserModel editUser(UserModel userModel) {
         System.out.println("Edit User ");
         String username = CreateParameter.createString("Name: ");
-        bankDAO.editBank(userModel.getBank());
-        addressDAO.editAddress(userModel.getAddress());
 
         if (!username.isEmpty()) {
 
