@@ -2,6 +2,7 @@ package br.org.LibraryManagement.service.bank;
 
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
 import br.org.LibraryManagement.util.RandomNumbers;
 
 import java.util.regex.Matcher;
@@ -10,22 +11,29 @@ import java.util.regex.Pattern;
 public class BankService {
 
     public static BankModel createBank() {
+        EncryptPassword encryptPassword = new EncryptPassword();
         System.out.println("Bank Account");
         String name = CreateParameter.createString("Name: ");
-        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
+//        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
+        String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
         System.out.println(checkAccountNumber);
+        String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);
+
         System.out.println("Please write these numbers because they will be used in the future.");
-        return new BankModel(checkAccountNumber, name);
+        return new BankModel(encryptedAccountNumber, name);
 
     }
 
     public static BankModel editBankAccount(BankModel bankModel) {
+        EncryptPassword encryptPassword = new EncryptPassword();
         String name = CreateParameter.createString("Name: ");
-        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
+//        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
+        String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
         System.out.println(checkAccountNumber);
         System.out.println("Please write these numbers because they will be used in the future.");
-        checkDigitAccountNumber(checkAccountNumber);
-        bankModel.setAccountNumber(checkAccountNumber);
+//        checkDigitAccountNumber(checkAccountNumber);
+        String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);
+        bankModel.setAccountNumber(encryptedAccountNumber);
         if(!name.isEmpty()){
             bankModel.setName(name);
         }
@@ -37,7 +45,7 @@ public class BankService {
 
     public static BankModel deposit(BankModel bankModel) {
 
-        checkDigitAccountNumber(bankModel.getAccountNumber());
+//        checkDigitAccountNumber(bankModel.getAccountNumber());
         showAccountBalance(bankModel);
         double valueToDeposit = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
 
@@ -53,7 +61,7 @@ public class BankService {
 
     public static BankModel withdraw(BankModel bankModel) {
 
-        checkDigitAccountNumber(bankModel.getAccountNumber());
+//        checkDigitAccountNumber(bankModel.getAccountNumber());
 //        checkAccountNumberIsEqual(bankModel);
         showAccountBalance(bankModel);
         double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to withdraw:$ ");
@@ -73,15 +81,15 @@ public class BankService {
 
     }
 
-    public static String checkDigitAccountNumber(String accountNumber) {
-
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
-        Matcher matcher = pattern.matcher(accountNumber);
-        if (accountNumber.length() != 6 || matcher.find()) {
-            throw new RuntimeException("The account number have character or have less or more to pattern");
-        }
-        return accountNumber;
-    }
+//    public static String checkDigitAccountNumber(String accountNumber) {
+//
+//        Pattern pattern = Pattern.compile("[a-zA-Z]");
+//        Matcher matcher = pattern.matcher(accountNumber);
+//        if (accountNumber.length() != 6 || matcher.find()) {
+//            throw new RuntimeException("The account number have character or have less or more to pattern");
+//        }
+//        return accountNumber;
+//    }
 
     public static double showAccountBalance(BankModel bankModel) {
 

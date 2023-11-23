@@ -1,4 +1,4 @@
-package br.org.LibraryManagement;
+package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
@@ -7,6 +7,7 @@ import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.UserDeleted;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -24,6 +25,8 @@ public class UserMain {
 
     public void startManagerUserMain() throws Exception {
         while (true) {
+            EncryptPassword encryptPassword = new EncryptPassword();
+            encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
             UserDAO userDAO = new UserDAO(entityManager);
             System.out.println("Manager the user");
             System.out.println("[1]Edit user");

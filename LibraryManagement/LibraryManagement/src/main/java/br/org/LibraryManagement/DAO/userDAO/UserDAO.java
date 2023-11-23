@@ -8,6 +8,7 @@ import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.LoginNotFoundException;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -55,7 +56,9 @@ public class UserDAO {
     public UserModel checkUserLogin() throws LoginNotFoundException {
         UserModel user = findUserByEmail();
         String password = CreateParameter.createString("Type your password: ");
-        if (!user.getPassword().equals(password)){
+        EncryptPassword encryptPassword = new EncryptPassword();
+        String decryptedPassword = encryptPassword.decryptedPassword(user.getPassword());
+        if (!decryptedPassword.equals(password)){
             throw new LoginNotFoundException("Error in do the login ", " Probable the user typed the email or password incorrect!  ");
         }
         return user;

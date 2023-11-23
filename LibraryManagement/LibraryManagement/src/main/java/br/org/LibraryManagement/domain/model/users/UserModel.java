@@ -56,12 +56,11 @@ public class UserModel {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + addressModel.toString() +
-                ", bank=" + bankModel.toString() +
-                ", Books= " + books.toString() +
+                "username='" + username + '\'' + "\n" +
+                ", email='" + email + '\'' + "\n" +
+                ", address=" + addressModel.toString() + "\n" +
+                ", bank=" + bankModel.toString() + "\n" +
+                ", Books= " + books.toString() + "\n" +
         '}';
     }
 

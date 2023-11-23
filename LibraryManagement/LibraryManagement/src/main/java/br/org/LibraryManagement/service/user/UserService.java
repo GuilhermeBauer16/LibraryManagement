@@ -11,24 +11,30 @@ import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
+import br.org.LibraryManagement.util.EncryptPassword;
 
 import java.util.List;
 
 public class UserService {
 
     public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailIsNotValid {
+        EncryptPassword encryptPassword = new EncryptPassword();
         System.out.println("New User");
         String username = CreateParameter.createString("Name: ");
         String password = CreateParameter.createString("Password: ");
+        String encryptedPassword = encryptPassword.encryptedPassword(password);
         String email = CreateParameter.createString("Email: ");
         checkUserEmail(email);
         BankModel bankModel = bankDAO.insert();
         AddressModel addressModel = addressDAO.insert();
-        return new UserModel(username, password, email, addressModel, bankModel);
+        return new UserModel(username, encryptedPassword, email, addressModel, bankModel);
 
     }
 
     public static UserModel editUser(UserModel userModel) {
+
+        EncryptPassword encryptPassword = new EncryptPassword();
+        encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         System.out.println("Edit User ");
         String username = CreateParameter.createString("Name: ");
 

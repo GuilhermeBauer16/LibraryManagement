@@ -1,4 +1,4 @@
-package br.org.LibraryManagement;
+package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.BooksDAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;

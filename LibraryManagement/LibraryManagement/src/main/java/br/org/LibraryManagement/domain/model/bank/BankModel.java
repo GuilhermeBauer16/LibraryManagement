@@ -53,7 +53,7 @@ public class BankModel {
     public String toString() {
         return "Bank" + "\n" +
                  "name= " + name + "\n" +
-                "accountNumber= '" + accountNumber + '\'' + "\n" +
+                '\'' + "\n" +
                 ", balance=" + balance + "\n"
                 ;
     }

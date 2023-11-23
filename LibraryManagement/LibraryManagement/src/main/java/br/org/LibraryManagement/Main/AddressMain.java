@@ -1,4 +1,4 @@
-package br.org.LibraryManagement;
+package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;

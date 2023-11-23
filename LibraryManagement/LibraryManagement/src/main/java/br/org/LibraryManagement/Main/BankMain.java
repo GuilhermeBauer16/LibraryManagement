@@ -1,9 +1,10 @@
-package br.org.LibraryManagement;
+package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
 
 import javax.persistence.EntityManager;
 
@@ -24,6 +25,8 @@ public class BankMain {
 
         BankDAO bankDAO = new BankDAO(entityManager);
         while (true) {
+            EncryptPassword encryptPassword = new EncryptPassword();
+            encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
             System.out.println("Manager Bank Account");
             System.out.println("[1] Deposit");
             System.out.println("[2] Withdraw");

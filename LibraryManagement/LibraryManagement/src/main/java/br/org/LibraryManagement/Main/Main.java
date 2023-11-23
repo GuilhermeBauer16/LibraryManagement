@@ -1,4 +1,4 @@
-package br.org.LibraryManagement;
+package br.org.LibraryManagement.Main;
 
 
 import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
@@ -17,13 +17,15 @@ public class Main {
         AddressDAO addressDAO = new AddressDAO(entityManager);
         BankDAO bankDAO = new BankDAO(entityManager);
         UserDAO userDAO = new UserDAO(entityManager);
-        System.out.println("Login Page ");
-        System.out.println("[1] New user");
-        System.out.println("[2] Login");
-        int loginOption = CreateParameter.createInt("Type your option: ");
+
         UserModel user;
 
         while (true) {
+
+            System.out.println("Login Page ");
+            System.out.println("[1] New user");
+            System.out.println("[2] Login");
+            int loginOption = CreateParameter.createInt("Type your option: ");
 
             if (loginOption == 1) {
                 userDAO.insert(UserService.createUser(addressDAO, bankDAO));
