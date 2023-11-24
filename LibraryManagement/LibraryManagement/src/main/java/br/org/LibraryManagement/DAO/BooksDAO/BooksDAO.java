@@ -3,6 +3,8 @@ package br.org.LibraryManagement.DAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.exception.BookNotAvailable;
+import br.org.LibraryManagement.exception.BookNotFound;
 import br.org.LibraryManagement.service.book.BookService;
 import br.org.LibraryManagement.util.CreateParameter;
 
@@ -19,7 +21,7 @@ public class BooksDAO {
         this.entityManager = entityManager;
     }
 
-    public void insert() {
+    public void insert() throws BookNotAvailable {
 
         BooksModel book = BookService.createBook();
         try {
@@ -34,7 +36,7 @@ public class BooksDAO {
 
     }
 
-    public static void showAllBooks() {
+    public void showAllBooks() {
         String jpql = "SELECT B FROM BooksModel B";
         Query query = entityManager.createQuery(jpql, BooksModel.class);
         List<BooksModel> books = query.getResultList();
@@ -57,8 +59,8 @@ public class BooksDAO {
         return findIdBook;
     }
 
-    public static void editBook() {
-        BooksModel editBook = BookService.editBook(findByBookId());
+    public void editBook() throws Exception {
+        BooksModel editBook = BookService.editBook(findBookByName());
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(editBook);
@@ -70,23 +72,25 @@ public class BooksDAO {
 
     }
 
-    public void deleteBook(){
-        showAllBooks();
-        BooksModel bookId =  findByBookId();
+    public void deleteBook() throws Exception {
+
+//        showAllBooks();
+        BooksModel bookName =  findBookByName();
         try{
             entityManager.getTransaction().begin();
-            entityManager.remove(bookId);
+            entityManager.remove(bookName);
             entityManager.getTransaction().commit();
-            System.out.println("the book with the name " + bookId.getName() + " was deleted");
+            System.out.println("the book with the name " + bookName + " was deleted");
         }catch (Exception ex){
             entityManager.getTransaction().rollback();
-            System.out.println("Have a error to deleted the book " + ex.getMessage());
+            throw new BookNotFound("The book was not found" , "Please check if the user type the correct book name");
 
         }
 
     }
 
     public void findByCategory(){
+
         String jpql = "SELECT BC FROM BooksModel BC WHERE BC.booksCategory = :booksCategory";
         BookService.listBookCategory();
         long category = CreateParameter.createLong("Type the number of the category that you have to filter: ");
@@ -110,9 +114,8 @@ public class BooksDAO {
             query.setParameter("name",bookName);
             booksModel = query.getSingleResult();
         }catch (Exception ex){
-
             entityManager.getTransaction().rollback();
-            throw  new Exception("The book name has not found" + ex.getMessage());
+            throw new BookNotFound("The book was not found" , "Please check if the user type the correct book name");
         }
 
         return booksModel;
@@ -135,6 +138,27 @@ public class BooksDAO {
 
 
     }
+
+    public static List<BooksModel> findBookByAvailableIsTrue() throws BookNotFound {
+
+        try {
+            String jpql = "SELECT BM FROM BooksModel BM WHERE BM.available = true";
+            Query query = entityManager.createQuery(jpql, BooksModel.class);
+            List<BooksModel> books = query.getResultList();
+
+            if(books.isEmpty()){
+                throw new BookNotFound("No available books found","");
+            }
+
+            return books;
+        }catch (Exception ex){
+            throw new BookNotFound("This book is not available","");
+
+        }
+
+    }
+
+
 
     public void closeConnection() {
         entityManager.close();

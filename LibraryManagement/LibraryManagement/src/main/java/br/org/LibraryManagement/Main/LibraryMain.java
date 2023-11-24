@@ -26,7 +26,7 @@ public class LibraryMain {
         while (true) {
 
             System.out.println("Welcome to Bauer Library");
-            System.out.println("Why you would like to do:");
+            System.out.println("What you would like to do:");
 
             System.out.println("[1]See all the books ");
             System.out.println("[2]Filter book by category ");

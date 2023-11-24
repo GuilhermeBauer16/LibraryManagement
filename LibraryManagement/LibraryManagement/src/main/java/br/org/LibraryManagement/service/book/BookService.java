@@ -1,15 +1,19 @@
 package br.org.LibraryManagement.service.book;
 
+import br.org.LibraryManagement.DAO.BooksDAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.exception.BookNotAvailable;
+import br.org.LibraryManagement.exception.BookNotFound;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
 
-import static br.org.LibraryManagement.DAO.BooksDAO.BooksDAO.findBookByName;
+import java.util.List;
 
 public class BookService {
 
-    public static BooksModel createBook() {
+    public static BooksModel createBook() throws BookNotAvailable {
         System.out.println("New book");
         String name = CreateParameter.createString("Name: ");
         String description = CreateParameter.createString("Description: ");
@@ -18,9 +22,14 @@ public class BookService {
         listBookCategory();
         long category = CreateParameter.createLong("Type the number of the category: ");
         BooksCategory booksCategory = BooksCategory.getBooksCategoryByValueId(category);
-        return new BooksModel(name, description, price, quantity, booksCategory);
+        boolean available = checkingIfIsAvailable(quantity);
+        return new BooksModel(name, description, price, quantity, booksCategory,available);
 
 
+    }
+
+    public static String showBookByName(BooksModel booksModel){
+        return booksModel.toString();
     }
 
     public static void listBookCategory() {
@@ -33,7 +42,14 @@ public class BookService {
         }
     }
 
-    public static BooksModel editBook(BooksModel booksModel) {
+    public static void listBooksAvailable() throws BookNotFound {
+        List<BooksModel> availableBooks = BooksDAO.findBookByAvailableIsTrue();
+        for (BooksModel booksModel: availableBooks){
+            System.out.println(booksModel.toString());
+        }
+    }
+
+    public static BooksModel editBook(BooksModel booksModel) throws BookNotAvailable {
         System.out.println("If you don't want to change the field please type enter!");
         String name = CreateParameter.createString("Name: ");
         String description = CreateParameter.createString("Description: ");
@@ -65,6 +81,8 @@ public class BookService {
             booksModel.setQuantity(quantity);
         }
 
+        checkingIfIsAvailable(booksModel.getQuantity());
+
         return booksModel;
 
 
@@ -81,20 +99,31 @@ public class BookService {
     }
 
     public static UserModel buyTheBook(UserModel userModel) throws Exception {
-
-        BooksModel booksModel = findBookByName();
+        EncryptPassword encryptPassword = new EncryptPassword();
+        BooksModel booksModel = BooksDAO.findByBookId();
         double accountBalance = userModel.getBank().getBalance();
         double bookPrice = booksModel.getPrice();
         if (accountBalance < bookPrice) {
             throw new RuntimeException("Sorry but you don't have money on your account for buy this book!");
         }
-
+        System.out.println("For continue please type your password");
+        encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         double result = accountBalance - bookPrice;
         userModel.getBank().setBalance(result);
         userModel.addBook(booksModel);
         return userModel;
 
 
+    }
+
+    public static boolean checkingIfIsAvailable(double quantity) throws BookNotAvailable {
+
+        if(quantity < 0){
+            throw new BookNotAvailable("This book is not available",
+                    "Probably don't had more books available");
+        }
+
+        return true;
     }
 
 }

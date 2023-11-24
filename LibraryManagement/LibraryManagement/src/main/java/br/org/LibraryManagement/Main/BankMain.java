@@ -24,9 +24,10 @@ public class BankMain {
 
 
         BankDAO bankDAO = new BankDAO(entityManager);
+        EncryptPassword encryptPassword = new EncryptPassword();
+        encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         while (true) {
-            EncryptPassword encryptPassword = new EncryptPassword();
-            encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
+
             System.out.println("Manager Bank Account");
             System.out.println("[1] Deposit");
             System.out.println("[2] Withdraw");

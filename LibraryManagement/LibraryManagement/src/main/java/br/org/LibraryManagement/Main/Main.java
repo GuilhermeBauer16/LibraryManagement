@@ -25,6 +25,8 @@ public class Main {
             System.out.println("Login Page ");
             System.out.println("[1] New user");
             System.out.println("[2] Login");
+            System.out.println("[3] Manager library (only for admins) ");
+
             int loginOption = CreateParameter.createInt("Type your option: ");
 
             if (loginOption == 1) {
@@ -39,6 +41,14 @@ public class Main {
                 break;
             }
 
+            if (loginOption == 3) {
+
+                LibraryManagementMain libraryManagementMain = new LibraryManagementMain(entityManager);
+                libraryManagementMain.startLibraryManagement();
+
+            }
+
+
             System.out.println("Please type a valid option!");
         }
 
@@ -49,7 +59,7 @@ public class Main {
             System.out.println("[2]Manager the user");
             System.out.println("[3]Manager the user Bank account");
             System.out.println("[4]Manager the user Address");
-            System.out.println("[5]Exit");
+
             int optionsMainMenu = CreateParameter.createInt("Choose the one option: ");
 
             switch (optionsMainMenu) {

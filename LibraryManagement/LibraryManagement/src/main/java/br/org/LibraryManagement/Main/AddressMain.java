@@ -4,6 +4,8 @@ import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.util.CreateParameter;
+import br.org.LibraryManagement.util.EncryptPassword;
+import org.jasypt.exceptions.EncryptionInitializationException;
 
 import javax.persistence.CacheRetrieveMode;
 import javax.persistence.EntityManager;
@@ -21,6 +23,8 @@ public class AddressMain {
 
     public void startAddressMain(){
         AddressDAO addressDAO = new AddressDAO(entityManager);
+        EncryptPassword encryptPassword = new EncryptPassword();
+        encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         while (true){
 
             System.out.println("Address Manager");

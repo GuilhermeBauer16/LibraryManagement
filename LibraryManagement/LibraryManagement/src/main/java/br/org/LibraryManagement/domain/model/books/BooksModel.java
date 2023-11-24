@@ -21,6 +21,8 @@ public class BooksModel {
 
     private double quantity;
 
+    private boolean available;
+
 
 
         @Enumerated(EnumType.STRING)
@@ -34,12 +36,13 @@ public class BooksModel {
     public BooksModel() {
     }
 
-    public BooksModel(String name, String description, Double price, double quantity, BooksCategory booksCategory) {
+    public BooksModel(String name, String description, Double price, double quantity, BooksCategory booksCategory, boolean available) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.booksCategory = booksCategory;
+        this.available = available;
     }
 
     public double getQuantity() {

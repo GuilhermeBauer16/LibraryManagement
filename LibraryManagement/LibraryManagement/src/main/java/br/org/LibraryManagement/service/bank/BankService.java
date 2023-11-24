@@ -27,11 +27,9 @@ public class BankService {
     public static BankModel editBankAccount(BankModel bankModel) {
         EncryptPassword encryptPassword = new EncryptPassword();
         String name = CreateParameter.createString("Name: ");
-//        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
         String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
         System.out.println(checkAccountNumber);
         System.out.println("Please write these numbers because they will be used in the future.");
-//        checkDigitAccountNumber(checkAccountNumber);
         String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);
         bankModel.setAccountNumber(encryptedAccountNumber);
         if(!name.isEmpty()){
@@ -44,9 +42,7 @@ public class BankService {
     }
 
     public static BankModel deposit(BankModel bankModel) {
-
-//        checkDigitAccountNumber(bankModel.getAccountNumber());
-        showAccountBalance(bankModel);
+        System.out.println("Deposit");
         double valueToDeposit = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
 
         if (valueToDeposit > 0) {
@@ -60,9 +56,7 @@ public class BankService {
     }
 
     public static BankModel withdraw(BankModel bankModel) {
-
-//        checkDigitAccountNumber(bankModel.getAccountNumber());
-//        checkAccountNumberIsEqual(bankModel);
+        System.out.println("Withdraw");
         showAccountBalance(bankModel);
         double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to withdraw:$ ");
 
@@ -80,16 +74,6 @@ public class BankService {
         throw new RuntimeException("The account does not have sufficient balance ");
 
     }
-
-//    public static String checkDigitAccountNumber(String accountNumber) {
-//
-//        Pattern pattern = Pattern.compile("[a-zA-Z]");
-//        Matcher matcher = pattern.matcher(accountNumber);
-//        if (accountNumber.length() != 6 || matcher.find()) {
-//            throw new RuntimeException("The account number have character or have less or more to pattern");
-//        }
-//        return accountNumber;
-//    }
 
     public static double showAccountBalance(BankModel bankModel) {
 
