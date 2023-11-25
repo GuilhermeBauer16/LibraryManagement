@@ -21,12 +21,13 @@ public class Main {
         UserModel user;
 
         while (true) {
-
+            System.out.println("=/".repeat(30));
             System.out.println("Login Page ");
+            System.out.println("=/".repeat(30));
             System.out.println("[1] New user");
             System.out.println("[2] Login");
             System.out.println("[3] Manager library (only for admins) ");
-
+            System.out.println("=/".repeat(30));
             int loginOption = CreateParameter.createInt("Type your option: ");
 
             if (loginOption == 1) {
@@ -53,12 +54,13 @@ public class Main {
         }
 
         while (true) {
-
+            System.out.println("=/".repeat(30));
             System.out.println("Menu");
             System.out.println("[1]Enter in the Bauer Library");
             System.out.println("[2]Manager the user");
             System.out.println("[3]Manager the user Bank account");
             System.out.println("[4]Manager the user Address");
+            System.out.println("=/".repeat(30));
 
             int optionsMainMenu = CreateParameter.createInt("Choose the one option: ");
 

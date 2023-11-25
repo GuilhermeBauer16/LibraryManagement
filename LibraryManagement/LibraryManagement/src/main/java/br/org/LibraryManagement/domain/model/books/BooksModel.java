@@ -102,6 +102,14 @@ public class BooksModel {
         this.users = users;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     @Override
     public String toString() {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);

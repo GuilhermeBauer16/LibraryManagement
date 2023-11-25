@@ -2,6 +2,7 @@ package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.BooksDAO.BooksDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.service.book.BookService;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 
@@ -30,15 +31,16 @@ public class LibraryMain {
 
             System.out.println("[1]See all the books ");
             System.out.println("[2]Filter book by category ");
-            System.out.println("[3]Buy a book ");
-            System.out.println("[4]See the book what you already bought ");
-            System.out.println("[5]Return to menu... ");
+            System.out.println("[3]Filter book by category ");
+            System.out.println("[4]Buy a book ");
+            System.out.println("[5]See the book what you already bought ");
+            System.out.println("[6]Return to menu... ");
 
             int libraryMenuOptions = CreateParameter.createInt("Choose a option: ");
 
             switch (libraryMenuOptions) {
                 case 1:
-                    booksDAO.showAllBooks();
+                    BookService.listBooksAvailable();
                     break;
 
                 case 2:
@@ -46,14 +48,18 @@ public class LibraryMain {
                     break;
 
                 case 3:
-                    booksDAO.buyTheBook(userModel);
+                    booksDAO.findBookByName();
                     break;
 
                 case 4:
-                    UserService.showUserBooks(userModel);
+                    booksDAO.buyTheBook(userModel);
                     break;
 
                 case 5:
+                    UserService.showUserBooks(userModel);
+                    break;
+
+                case 6:
                     System.out.println("Returning to menu! ");
                     return;
 

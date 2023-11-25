@@ -22,13 +22,17 @@ public class BookService {
         listBookCategory();
         long category = CreateParameter.createLong("Type the number of the category: ");
         BooksCategory booksCategory = BooksCategory.getBooksCategoryByValueId(category);
-        boolean available = checkingIfIsAvailable(quantity);
-        return new BooksModel(name, description, price, quantity, booksCategory,available);
+        boolean available = false;
+        if (quantity > 0) {
+            available = true;
+        }
+
+        return new BooksModel(name, description, price, quantity, booksCategory, available);
 
 
     }
 
-    public static String showBookByName(BooksModel booksModel){
+    public static String showBookByName(BooksModel booksModel) {
         return booksModel.toString();
     }
 
@@ -43,9 +47,18 @@ public class BookService {
     }
 
     public static void listBooksAvailable() throws BookNotFound {
-        List<BooksModel> availableBooks = BooksDAO.findBookByAvailableIsTrue();
-        for (BooksModel booksModel: availableBooks){
+        List<BooksModel> availableBooks = BooksDAO.findBooksByAvailability(true);
+        for (BooksModel booksModel : availableBooks) {
             System.out.println(booksModel.toString());
+        }
+    }
+
+    public static void listBookNoAvailable() throws BookNotFound {
+        List<BooksModel> noAvailableBooks = BooksDAO.findBooksByAvailability(false);
+
+        for (BooksModel booksModel : noAvailableBooks) {
+            System.out.println(booksModel.toString());
+
         }
     }
 
@@ -63,44 +76,43 @@ public class BookService {
         }
 
 
-        if(checkIfIsTrue("You would like to change the book price[y|n]: ") == true) {
+        if (checkIfIsTrue("You would like to change the book price[y|n]: ") == true) {
             Double price = CreateParameter.createDouble("Price: ");
             booksModel.setPrice(price);
 
         }
 
-        if (checkIfIsTrue("You would like to change the book category:[y|n]: ")){
+        if (checkIfIsTrue("You would like to change the book category:[y|n]: ")) {
             listBookCategory();
             long category = CreateParameter.createLong("Type the number of the category: ");
             BooksCategory booksCategory = BooksCategory.getBooksCategoryByValueId(category);
             booksModel.setBooksCategory(booksCategory);
         }
 
-        if(checkIfIsTrue("You would like to change the book quantity:[y|n]: ")){
+        if (checkIfIsTrue("You would like to change the book quantity:[y|n]: ")) {
             Double quantity = CreateParameter.createDouble("Quantity: ");
             booksModel.setQuantity(quantity);
+            checkingIfIsAvailable(booksModel);
         }
 
-        checkingIfIsAvailable(booksModel.getQuantity());
 
         return booksModel;
 
-
     }
 
-    public static boolean checkIfIsTrue(String message){
+    public static boolean checkIfIsTrue(String message) {
 
         String check = CreateParameter.createString(message).toUpperCase();
         char firstLetter = check.charAt(0);
         if (firstLetter == 'Y') {
             return true;
         }
-        return  false;
+        return false;
     }
 
     public static UserModel buyTheBook(UserModel userModel) throws Exception {
         EncryptPassword encryptPassword = new EncryptPassword();
-        BooksModel booksModel = BooksDAO.findByBookId();
+        BooksModel booksModel = BooksDAO.findBookByName();
         double accountBalance = userModel.getBank().getBalance();
         double bookPrice = booksModel.getPrice();
         if (accountBalance < bookPrice) {
@@ -116,14 +128,14 @@ public class BookService {
 
     }
 
-    public static boolean checkingIfIsAvailable(double quantity) throws BookNotAvailable {
+    public static void checkingIfIsAvailable(BooksModel booksModel) throws BookNotAvailable {
 
-        if(quantity < 0){
+        if (booksModel.getQuantity() < 0) {
             throw new BookNotAvailable("This book is not available",
                     "Probably don't had more books available");
         }
 
-        return true;
+        booksModel.setAvailable(true);
     }
 
 }

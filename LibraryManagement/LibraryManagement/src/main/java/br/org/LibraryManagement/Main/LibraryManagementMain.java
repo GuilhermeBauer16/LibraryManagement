@@ -18,7 +18,7 @@ public class LibraryManagementMain {
 
     public void startLibraryManagement() throws Exception {
         BooksDAO booksDAO = new BooksDAO(entityManager);
-        while (true){
+        while (true) {
             System.out.println("Library Management ");
             System.out.println("[1] Insert a new book ");
             System.out.println("[2] Delete a book ");
@@ -26,11 +26,12 @@ public class LibraryManagementMain {
             System.out.println("[4] See all books ");
             System.out.println("[5] filter book by category ");
             System.out.println("[6] filter book by name ");
-            System.out.println("[7] Returning to menu ");
+            System.out.println("[7] See books no available ");
+            System.out.println("[8] Returning to menu ");
 
             int libraryManagementOptions = CreateParameter.createInt("Choose a option: ");
 
-            switch (libraryManagementOptions){
+            switch (libraryManagementOptions) {
                 case 1:
                     booksDAO.insert();
                     break;
@@ -53,7 +54,12 @@ public class LibraryManagementMain {
                     BooksModel book = booksDAO.findBookByName();
                     System.out.println(BookService.showBookByName(book));
                     break;
+
                 case 7:
+                    System.out.println("If you wanted to turn one of this books available add at least 1 to your quantity");
+                    BookService.listBookNoAvailable();
+                    break;
+                case 8:
                     System.out.println("returning to Menu ");
                     return;
 
