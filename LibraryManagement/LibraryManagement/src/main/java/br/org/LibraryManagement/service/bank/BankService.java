@@ -5,6 +5,8 @@ import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
 import br.org.LibraryManagement.util.RandomNumbers;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,37 +14,37 @@ public class BankService {
 
     public static BankModel createBank() {
         EncryptPassword encryptPassword = new EncryptPassword();
+        System.out.println("=/".repeat(30));
         System.out.println("Bank Account");
+        System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
-//        String checkAccountNumber = checkDigitAccountNumber(RandomNumbers.createRandomNumbers(6));
         String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
         System.out.println(checkAccountNumber);
         String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);
-
         System.out.println("Please write these numbers because they will be used in the future.");
+        System.out.println("=/".repeat(30));
         return new BankModel(encryptedAccountNumber, name);
 
     }
 
     public static BankModel editBankAccount(BankModel bankModel) {
-        EncryptPassword encryptPassword = new EncryptPassword();
+        System.out.println("=/".repeat(30));
+        System.out.println("Edit Bank account");
+        System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
-        String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
-        System.out.println(checkAccountNumber);
-        System.out.println("Please write these numbers because they will be used in the future.");
-        String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);
-        bankModel.setAccountNumber(encryptedAccountNumber);
+        System.out.println("=/".repeat(30));
         if(!name.isEmpty()){
             bankModel.setName(name);
         }
-
 
         return bankModel;
 
     }
 
     public static BankModel deposit(BankModel bankModel) {
+        System.out.println("/=".repeat(30));
         System.out.println("Deposit");
+        System.out.println("/=".repeat(30));
         double valueToDeposit = CreateParameter.createDouble("Type the value that you want to deposit:$ ");
 
         if (valueToDeposit > 0) {
@@ -56,7 +58,9 @@ public class BankService {
     }
 
     public static BankModel withdraw(BankModel bankModel) {
+        System.out.println("/=".repeat(30));
         System.out.println("Withdraw");
+        System.out.println("/=".repeat(30));
         showAccountBalance(bankModel);
         double valueToWithdraw = CreateParameter.createDouble("Type the value that you want to withdraw:$ ");
 
@@ -75,10 +79,10 @@ public class BankService {
 
     }
 
-    public static double showAccountBalance(BankModel bankModel) {
+    public static String showAccountBalance(BankModel bankModel) {
 
-
-        return bankModel.getBalance();
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
+        return numberFormat.format(bankModel.getBalance());
 
     }
 

@@ -1,11 +1,7 @@
 package br.org.LibraryManagement.DAO.userDAO;
 
-import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
-import br.org.LibraryManagement.DAO.BankDAO.BankDAO;
-import br.org.LibraryManagement.domain.model.address.AddressModel;
-import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
-import br.org.LibraryManagement.exception.LoginNotFoundException;
+import br.org.LibraryManagement.exception.LoginNotFound;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -53,13 +49,13 @@ public class UserDAO {
 
     }
 
-    public UserModel checkUserLogin() throws LoginNotFoundException {
+    public UserModel checkUserLogin() throws LoginNotFound {
         UserModel user = findUserByEmail();
         String password = CreateParameter.createString("Type your password: ");
         EncryptPassword encryptPassword = new EncryptPassword();
         String decryptedPassword = encryptPassword.decryptedPassword(user.getPassword());
         if (!decryptedPassword.equals(password)){
-            throw new LoginNotFoundException("Error in do the login ", " Probable the user typed the email or password incorrect!  ");
+            throw new LoginNotFound("Error in do the login ", " Probable the user typed the email or password incorrect!  ");
         }
         return user;
     }

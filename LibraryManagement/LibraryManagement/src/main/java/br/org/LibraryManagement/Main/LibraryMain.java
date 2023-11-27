@@ -25,17 +25,18 @@ public class LibraryMain {
 
 
         while (true) {
-
+            System.out.println("=/".repeat(30));
             System.out.println("Welcome to Bauer Library");
+            System.out.println("=/".repeat(30));
             System.out.println("What you would like to do:");
-
+            System.out.println("=/".repeat(30));
             System.out.println("[1]See all the books ");
             System.out.println("[2]Filter book by category ");
-            System.out.println("[3]Filter book by category ");
+            System.out.println("[3]Filter book by name ");
             System.out.println("[4]Buy a book ");
             System.out.println("[5]See the book what you already bought ");
             System.out.println("[6]Return to menu... ");
-
+            System.out.println("=/".repeat(30));
             int libraryMenuOptions = CreateParameter.createInt("Choose a option: ");
 
             switch (libraryMenuOptions) {

@@ -14,7 +14,9 @@ import java.util.List;
 public class BookService {
 
     public static BooksModel createBook() throws BookNotAvailable {
+        System.out.println("=/".repeat(30));
         System.out.println("New book");
+        System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
         String description = CreateParameter.createString("Description: ");
         double price = CreateParameter.createDouble("Price: ");
@@ -22,6 +24,7 @@ public class BookService {
         listBookCategory();
         long category = CreateParameter.createLong("Type the number of the category: ");
         BooksCategory booksCategory = BooksCategory.getBooksCategoryByValueId(category);
+        System.out.println("=/".repeat(30));
         boolean available = false;
         if (quantity > 0) {
             available = true;
@@ -47,23 +50,31 @@ public class BookService {
     }
 
     public static void listBooksAvailable() throws BookNotFound {
+
         List<BooksModel> availableBooks = BooksDAO.findBooksByAvailability(true);
+        System.out.println("=/".repeat(30));
         for (BooksModel booksModel : availableBooks) {
             System.out.println(booksModel.toString());
+            System.out.println("=/".repeat(30));
         }
     }
 
     public static void listBookNoAvailable() throws BookNotFound {
         List<BooksModel> noAvailableBooks = BooksDAO.findBooksByAvailability(false);
-
+        System.out.println("=/".repeat(30));
         for (BooksModel booksModel : noAvailableBooks) {
             System.out.println(booksModel.toString());
+            System.out.println("=/".repeat(30));
 
         }
     }
 
     public static BooksModel editBook(BooksModel booksModel) throws BookNotAvailable {
+
         System.out.println("If you don't want to change the field please type enter!");
+        System.out.println("=/".repeat(30));
+        System.out.println("Edit book");
+        System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
         String description = CreateParameter.createString("Description: ");
 
@@ -95,7 +106,7 @@ public class BookService {
             checkingIfIsAvailable(booksModel);
         }
 
-
+        System.out.println("=/".repeat(30));
         return booksModel;
 
     }
@@ -111,8 +122,12 @@ public class BookService {
     }
 
     public static UserModel buyTheBook(UserModel userModel) throws Exception {
+
         EncryptPassword encryptPassword = new EncryptPassword();
         BooksModel booksModel = BooksDAO.findBookByName();
+        if (booksModel.isAvailable() == false) {
+            throw new BookNotAvailable("This book is not available", "");
+        }
         double accountBalance = userModel.getBank().getBalance();
         double bookPrice = booksModel.getPrice();
         if (accountBalance < bookPrice) {

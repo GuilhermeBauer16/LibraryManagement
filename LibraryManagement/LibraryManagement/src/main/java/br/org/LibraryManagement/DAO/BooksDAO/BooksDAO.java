@@ -51,7 +51,6 @@ public class BooksDAO {
 
     public void deleteBook() throws Exception {
 
-
         BooksModel bookName = findBookByName();
         bookName.setAvailable(false);
         try {
@@ -67,7 +66,7 @@ public class BooksDAO {
 
     }
 
-    public void findByCategory() {
+    public void findByCategory() throws BookNotFound {
 
         String jpql = "SELECT BC FROM BooksModel BC WHERE BC.booksCategory = :booksCategory";
         BookService.listBookCategory();
@@ -77,7 +76,9 @@ public class BooksDAO {
         query.setParameter("booksCategory", booksCategory);
         List<BooksModel> books = query.getResultList();
         for (BooksModel book : books) {
-            System.out.println(book.toString());
+            if (book.isAvailable() == true) {
+                System.out.println(book.toString());
+            }
         }
     }
 
@@ -134,9 +135,4 @@ public class BooksDAO {
         }
     }
 
-
-
-    public void closeConnection() {
-        entityManager.close();
-    }
 }

@@ -8,11 +8,15 @@ import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.JPAUtil;
+import br.org.LibraryManagement.util.LibraryManagementEnv;
 
 import javax.persistence.*;
 
 public class Main {
+
+
     public static void main(String[] args) throws Exception {
+
         EntityManager entityManager = JPAUtil.getEntityManager();
         AddressDAO addressDAO = new AddressDAO(entityManager);
         BankDAO bankDAO = new BankDAO(entityManager);
@@ -43,7 +47,8 @@ public class Main {
             }
 
             if (loginOption == 3) {
-
+                String password = CreateParameter.createString("type the root password: ");
+                LibraryManagementEnv.checkingIfEnvironmentVariableIsEqual(password);
                 LibraryManagementMain libraryManagementMain = new LibraryManagementMain(entityManager);
                 libraryManagementMain.startLibraryManagement();
 
@@ -54,12 +59,15 @@ public class Main {
         }
 
         while (true) {
+
             System.out.println("=/".repeat(30));
             System.out.println("Menu");
+            System.out.println("=/".repeat(30));
             System.out.println("[1]Enter in the Bauer Library");
             System.out.println("[2]Manager the user");
             System.out.println("[3]Manager the user Bank account");
             System.out.println("[4]Manager the user Address");
+            System.out.println("[5]Exit to system");
             System.out.println("=/".repeat(30));
 
             int optionsMainMenu = CreateParameter.createInt("Choose the one option: ");

@@ -6,9 +6,7 @@ import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
-import br.org.LibraryManagement.exception.EmailIsNotValid;
-import br.org.LibraryManagement.service.address.AddressService;
-import br.org.LibraryManagement.service.bank.BankService;
+import br.org.LibraryManagement.exception.EmailNotValid;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -17,9 +15,12 @@ import java.util.List;
 
 public class UserService {
 
-    public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailIsNotValid {
+    public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailNotValid {
         EncryptPassword encryptPassword = new EncryptPassword();
+        System.out.println("=/".repeat(30));
         System.out.println("New User");
+        System.out.println("=/".repeat(30));
+
         String username = CreateParameter.createString("Name: ");
         String password = CreateParameter.createString("Password: ");
         String encryptedPassword = encryptPassword.encryptedPassword(password);
@@ -27,6 +28,7 @@ public class UserService {
         checkUserEmail(email);
         BankModel bankModel = bankDAO.insert();
         AddressModel addressModel = addressDAO.insert();
+        System.out.println("=/".repeat(30));
         return new UserModel(username, encryptedPassword, email, addressModel, bankModel);
 
     }
@@ -39,7 +41,6 @@ public class UserService {
         String username = CreateParameter.createString("Name: ");
 
         if (!username.isEmpty()) {
-
             userModel.setUsername(username);
         }
 
@@ -47,9 +48,9 @@ public class UserService {
     }
 
 
-    public static String checkUserEmail(String email) throws EmailIsNotValid {
+    public static String checkUserEmail(String email) throws EmailNotValid {
         if (!EmailCheck.isValidEmail(email)) {
-            throw new EmailIsNotValid("Please type a valid email", " Maybe the user don't type the @");
+            throw new EmailNotValid("Please type a valid email", " Maybe the user don't type the @");
         }
         return email;
     }

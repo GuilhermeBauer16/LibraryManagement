@@ -8,7 +8,10 @@ public class AddressService {
 
 
     public static AddressModel createAddress() {
+
+        System.out.println("=/".repeat(30));
         System.out.println("Address");
+        System.out.println("=/".repeat(30));
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
@@ -17,6 +20,8 @@ public class AddressService {
         String state = CreateParameter.createString("State: ");
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
+        System.out.println("=/".repeat(30));
+
 
         AddressModel addressModel = new AddressModel(street, neighborhood, zipCode, number, state, city, complement);
 
@@ -25,8 +30,10 @@ public class AddressService {
 
 
     public static AddressModel editAddress(AddressModel addressModel) {
-
+        System.out.println("=/".repeat(30));
         System.out.println("Edit Address");
+        System.out.println("=/".repeat(30));
+
         String street = CreateParameter.createString("Street: ");
         String neighborhood = CreateParameter.createString("Neighborhood: ");
         String zipCode = CreateParameter.createString("Zip code: ");
@@ -34,6 +41,7 @@ public class AddressService {
         String state = CreateParameter.createString("State: ");
         String city = CreateParameter.createString("City: ");
         String complement = CreateParameter.createString("Complement: ");
+        System.out.println("=/".repeat(30));
 
         if (!street.isEmpty()) {
             addressModel.setStreet(street);
@@ -70,7 +78,7 @@ public class AddressService {
 
     }
 
-    public static String showUserAddress(AddressModel addressModel){
+    public static String showUserAddress(AddressModel addressModel) {
         return addressModel.toString();
     }
 

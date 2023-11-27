@@ -24,15 +24,19 @@ public class UserMain {
     }
 
     public void startManagerUserMain() throws Exception {
+        EncryptPassword encryptPassword = new EncryptPassword();
+        encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         while (true) {
-            EncryptPassword encryptPassword = new EncryptPassword();
-            encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
+
             UserDAO userDAO = new UserDAO(entityManager);
+            System.out.println("=/".repeat(30));
             System.out.println("Manager the user");
+            System.out.println("=/".repeat(30));
             System.out.println("[1]Edit user");
             System.out.println("[2]Delete user ");
             System.out.println("[3]See user information");
-            System.out.println("[4] return to menu");
+            System.out.println("[4]Return to menu");
+            System.out.println("=/".repeat(30));
 
             int userMenuOptions = CreateParameter.createInt("Please choose the option: ");
 

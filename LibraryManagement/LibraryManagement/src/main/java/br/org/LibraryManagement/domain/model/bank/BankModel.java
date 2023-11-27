@@ -1,6 +1,8 @@
 package br.org.LibraryManagement.domain.model.bank;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Table(name = "bank_accounts")
@@ -51,10 +53,10 @@ public class BankModel {
 
     @Override
     public String toString() {
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
         return "Bank" + "\n" +
-                 "name= " + name + "\n" +
-                '\'' + "\n" +
-                ", balance=" + balance + "\n"
+                 "Name= " + name + "\n" +
+                "Balance= " + numberFormat.format(balance) + "\n"
                 ;
     }
 }

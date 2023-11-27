@@ -96,12 +96,12 @@ public class AddressModel {
     public String toString() {
         return "Address " + "\n" +
 
-                "street='" + street + '\'' + "\n" +
-                ", neighborhood='" + neighborhood + '\'' + "\n" +
-                ", zip_code='" + zip_code + '\'' + "\n" +
-                ", number='" + number + '\'' + "\n" +
-                ", city='" + city + '\'' + "\n" +
-                ", complement='" + complement + '\'' + "\n"
+                "Street= " + street  + "\n" +
+                "Neighborhood= " + neighborhood  + "\n" +
+                "Zip-code= " + zip_code + "\n" +
+                "Number= " + number + "\n" +
+                "City= " + city + "\n" +
+                "Complement= " + complement + "\n"
                 ;
     }
 }

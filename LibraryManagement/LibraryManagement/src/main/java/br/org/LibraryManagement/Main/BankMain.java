@@ -28,13 +28,16 @@ public class BankMain {
         encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         while (true) {
 
+            System.out.println("=/".repeat(30));
             System.out.println("Manager Bank Account");
+            System.out.println("=/".repeat(30));
             System.out.println("[1] Deposit");
             System.out.println("[2] Withdraw");
             System.out.println("[3] See your balance");
             System.out.println("[4] See your information");
             System.out.println("[5] Edit your information");
             System.out.println("[6] Return to menu");
+            System.out.println("=/".repeat(30));
 
             int bankMenuOption = CreateParameter.createInt("Choose a one of menu option: ");
 

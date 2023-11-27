@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Entity
-@Table(name="books")
+@Table(name = "books")
 public class BooksModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,12 @@ public class BooksModel {
     private boolean available;
 
 
-
-        @Enumerated(EnumType.STRING)
-        @Column(name = "book_category")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "book_category")
     private BooksCategory booksCategory;
 
     @ManyToMany(mappedBy = "books")
-    private List<UserModel> users =new ArrayList<>();
+    private List<UserModel> users = new ArrayList<>();
 
 
     public BooksModel() {
@@ -85,14 +84,6 @@ public class BooksModel {
         this.booksCategory = booksCategory;
     }
 
-//    public PaymentMethod getPaymentMethod() {
-//        return paymentMethod;
-//    }
-//
-//    public void setPaymentMethod(PaymentMethod paymentMethod) {
-//        this.paymentMethod = paymentMethod;
-//    }
-
 
     public List<UserModel> getUsers() {
         return users;
@@ -113,11 +104,11 @@ public class BooksModel {
     @Override
     public String toString() {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
-        return "Books" + "\n" +
-                "name: '" + name + '\'' + "\n" +
-                ", description: '" + description + '\'' + "\n" +
-                ", price: " + numberFormat.format(price) + "\n" +
-                ", booksCategory: " + booksCategory
+        return
+                "Name: " + name + "\n" +
+                        "Description: " + description + "\n" +
+                        "Price: " + numberFormat.format(price) + "\n" +
+                        "Book category: " + booksCategory
                 ;
     }
 }

@@ -26,11 +26,13 @@ public class AddressMain {
         EncryptPassword encryptPassword = new EncryptPassword();
         encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());
         while (true){
-
+            System.out.println("=/".repeat(30));
             System.out.println("Address Manager");
+            System.out.println("=/".repeat(30));
             System.out.println("[1] Edit Address");
             System.out.println("[2] See your information");
             System.out.println("[3] Return to menu");
+            System.out.println("=/".repeat(30));
 
             int addressMenuOptions = CreateParameter.createInt("Choose one of menu options: ");
             switch (addressMenuOptions){
