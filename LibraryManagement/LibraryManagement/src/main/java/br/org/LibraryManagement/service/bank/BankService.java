@@ -1,6 +1,8 @@
 package br.org.LibraryManagement.service.bank;
 
 import br.org.LibraryManagement.domain.model.bank.BankModel;
+import br.org.LibraryManagement.exception.InsufficientBalance;
+import br.org.LibraryManagement.exception.PasswordIncorrect;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
 import br.org.LibraryManagement.util.RandomNumbers;
@@ -12,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class BankService {
 
-    public static BankModel createBank() {
+    public static BankModel createBank() throws PasswordIncorrect {
         EncryptPassword encryptPassword = new EncryptPassword();
         System.out.println("=/".repeat(30));
         System.out.println("Bank Account");
@@ -41,7 +43,8 @@ public class BankService {
 
     }
 
-    public static BankModel deposit(BankModel bankModel) {
+    public static BankModel deposit(BankModel bankModel) throws PasswordIncorrect {
+        checkingAccountNumber(bankModel);
         System.out.println("/=".repeat(30));
         System.out.println("Deposit");
         System.out.println("/=".repeat(30));
@@ -57,7 +60,8 @@ public class BankService {
 
     }
 
-    public static BankModel withdraw(BankModel bankModel) {
+    public static BankModel withdraw(BankModel bankModel) throws InsufficientBalance, PasswordIncorrect {
+        checkingAccountNumber(bankModel);
         System.out.println("/=".repeat(30));
         System.out.println("Withdraw");
         System.out.println("/=".repeat(30));
@@ -75,7 +79,7 @@ public class BankService {
             return bankModel;
         }
 
-        throw new RuntimeException("The account does not have sufficient balance ");
+        throw new InsufficientBalance("The account does not have sufficient balance ","");
 
     }
 
@@ -88,5 +92,16 @@ public class BankService {
 
     public static String showUserInformation(BankModel bankModel){
         return  bankModel.toString();
+    }
+
+
+    public static void checkingAccountNumber(BankModel bankModel) throws PasswordIncorrect {
+
+        EncryptPassword encryptPassword = new EncryptPassword();
+        String dbAccountNumber = encryptPassword.decryptedPassword(bankModel.getAccountNumber());
+        String accountNumber = CreateParameter.createString("Please type your account number: ");
+        if(!dbAccountNumber.equals(accountNumber)){
+            throw new RuntimeException("the account number has wrong!");
+        }
     }
 }

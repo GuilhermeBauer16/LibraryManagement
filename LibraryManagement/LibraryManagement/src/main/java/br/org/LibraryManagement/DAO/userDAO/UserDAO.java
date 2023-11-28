@@ -2,6 +2,7 @@ package br.org.LibraryManagement.DAO.userDAO;
 
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.LoginNotFound;
+import br.org.LibraryManagement.exception.PasswordIncorrect;
 import br.org.LibraryManagement.service.user.UserService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -49,7 +50,7 @@ public class UserDAO {
 
     }
 
-    public UserModel checkUserLogin() throws LoginNotFound {
+    public UserModel checkUserLogin() throws LoginNotFound, PasswordIncorrect {
         UserModel user = findUserByEmail();
         String password = CreateParameter.createString("Type your password: ");
         EncryptPassword encryptPassword = new EncryptPassword();

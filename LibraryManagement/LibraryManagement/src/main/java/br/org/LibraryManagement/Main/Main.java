@@ -38,10 +38,16 @@ public class Main {
                 userDAO.insert(UserService.createUser(addressDAO, bankDAO));
                 System.out.println("Your user has registered with successful!");
                 System.out.println("Please make a login ");
+                System.out.println("/=".repeat(30));
+                System.out.println("Login");
+                System.out.println("/=".repeat(30));
                 user = userDAO.checkUserLogin();
                 break;
             }
             if (loginOption == 2) {
+                System.out.println("/=".repeat(30));
+                System.out.println("Login");
+                System.out.println("/=".repeat(30));
                 user = userDAO.checkUserLogin();
                 break;
             }

@@ -2,6 +2,7 @@ package br.org.LibraryManagement.Main;
 
 import br.org.LibraryManagement.DAO.AddressDAO.AddressDAO;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.exception.PasswordIncorrect;
 import br.org.LibraryManagement.service.address.AddressService;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -21,7 +22,7 @@ public class AddressMain {
     }
 
 
-    public void startAddressMain(){
+    public void startAddressMain() throws PasswordIncorrect {
         AddressDAO addressDAO = new AddressDAO(entityManager);
         EncryptPassword encryptPassword = new EncryptPassword();
         encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());

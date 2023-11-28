@@ -7,6 +7,7 @@ import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.EmailNotValid;
+import br.org.LibraryManagement.exception.PasswordIncorrect;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class UserService {
 
-    public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailNotValid {
+    public static UserModel createUser(AddressDAO addressDAO, BankDAO bankDAO) throws EmailNotValid, PasswordIncorrect {
         EncryptPassword encryptPassword = new EncryptPassword();
         System.out.println("=/".repeat(30));
         System.out.println("New User");
@@ -33,7 +34,7 @@ public class UserService {
 
     }
 
-    public static UserModel editUser(UserModel userModel) {
+    public static UserModel editUser(UserModel userModel) throws PasswordIncorrect {
 
         EncryptPassword encryptPassword = new EncryptPassword();
         encryptPassword.checkingIfThePasswordsAreEquals(userModel.getPassword());

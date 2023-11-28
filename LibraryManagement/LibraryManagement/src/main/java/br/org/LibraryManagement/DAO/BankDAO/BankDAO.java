@@ -2,6 +2,7 @@ package br.org.LibraryManagement.DAO.BankDAO;
 
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.exception.InsufficientBalance;
 import br.org.LibraryManagement.service.bank.BankService;
 import br.org.LibraryManagement.util.CreateParameter;
 
@@ -61,8 +62,7 @@ public class BankDAO {
             entityManager.getTransaction().commit();
             return bankModel;
         } catch (Exception ex) {
-            entityManager.getTransaction().rollback();
-            throw new Exception("have a error in the trying to withdraw! " + ex.getMessage());
+            throw new InsufficientBalance("The account does not have sufficient balance","");
 
         }
     }
@@ -77,8 +77,7 @@ public class BankDAO {
             return  depositInTheAccount;
 
         } catch (Exception ex) {
-            entityManager.getTransaction().rollback();
-            throw new Exception("Have a error in to deposit a value! " + ex.getMessage());
+            throw new Exception("Have a error in deposit into account");
         }
     }
 
