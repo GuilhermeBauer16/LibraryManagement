@@ -8,6 +8,7 @@ import br.org.LibraryManagement.util.CreateParameter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -39,6 +40,7 @@ public class UserModel {
     }
 
     public UserModel(String username, String password, String email, AddressModel addressModel, BankModel bankModel) {
+
         this.username = username;
         this.password = password;
         this.email = email;
@@ -131,5 +133,18 @@ public class UserModel {
 
     public void setBooks(List<BooksModel> books) {
         this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return Objects.equals(username, userModel.username) && Objects.equals(password, userModel.password) && Objects.equals(email, userModel.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, email);
     }
 }

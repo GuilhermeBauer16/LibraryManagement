@@ -8,6 +8,7 @@ import br.org.LibraryManagement.domain.model.books.BooksModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.EmailNotValid;
 import br.org.LibraryManagement.exception.PasswordIncorrect;
+import br.org.LibraryManagement.util.CheckIfDataIsEmpty;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EmailCheck;
 import br.org.LibraryManagement.util.EncryptPassword;
@@ -23,9 +24,12 @@ public class UserService {
         System.out.println("=/".repeat(30));
 
         String username = CreateParameter.createString("Name: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(username);
         String password = CreateParameter.createString("Password: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(password);
         String encryptedPassword = encryptPassword.encryptedPassword(password);
         String email = CreateParameter.createString("Email: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(email);
         checkUserEmail(email);
         BankModel bankModel = bankDAO.insert();
         AddressModel addressModel = addressDAO.insert();
@@ -65,5 +69,6 @@ public class UserService {
 
 
         }
+
     }
 }

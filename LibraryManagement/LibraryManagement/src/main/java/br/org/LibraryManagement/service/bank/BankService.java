@@ -3,6 +3,7 @@ package br.org.LibraryManagement.service.bank;
 import br.org.LibraryManagement.domain.model.bank.BankModel;
 import br.org.LibraryManagement.exception.InsufficientBalance;
 import br.org.LibraryManagement.exception.PasswordIncorrect;
+import br.org.LibraryManagement.util.CheckIfDataIsEmpty;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
 import br.org.LibraryManagement.util.RandomNumbers;
@@ -20,6 +21,7 @@ public class BankService {
         System.out.println("Bank Account");
         System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(name);
         String checkAccountNumber = RandomNumbers.createRandomNumbers(6);
         System.out.println(checkAccountNumber);
         String encryptedAccountNumber = encryptPassword.encryptedPassword(checkAccountNumber);

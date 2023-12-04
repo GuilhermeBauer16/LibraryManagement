@@ -6,6 +6,7 @@ import br.org.LibraryManagement.domain.model.books.BooksCategory;
 import br.org.LibraryManagement.domain.model.users.UserModel;
 import br.org.LibraryManagement.exception.BookNotAvailable;
 import br.org.LibraryManagement.exception.BookNotFound;
+import br.org.LibraryManagement.util.CheckIfDataIsEmpty;
 import br.org.LibraryManagement.util.CreateParameter;
 import br.org.LibraryManagement.util.EncryptPassword;
 
@@ -18,7 +19,9 @@ public class BookService {
         System.out.println("New book");
         System.out.println("=/".repeat(30));
         String name = CreateParameter.createString("Name: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(name);
         String description = CreateParameter.createString("Description: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(description);
         double price = CreateParameter.createDouble("Price: ");
         double quantity = CreateParameter.createDouble("Quantity: ");
         listBookCategory();

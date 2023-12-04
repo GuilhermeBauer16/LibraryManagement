@@ -2,6 +2,7 @@ package br.org.LibraryManagement.service.address;
 
 import br.org.LibraryManagement.domain.model.address.AddressModel;
 import br.org.LibraryManagement.domain.model.users.UserModel;
+import br.org.LibraryManagement.util.CheckIfDataIsEmpty;
 import br.org.LibraryManagement.util.CreateParameter;
 
 public class AddressService {
@@ -13,13 +14,20 @@ public class AddressService {
         System.out.println("Address");
         System.out.println("=/".repeat(30));
         String street = CreateParameter.createString("Street: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(street);
         String neighborhood = CreateParameter.createString("Neighborhood: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(neighborhood);
         String zipCode = CreateParameter.createString("Zip code: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(zipCode);
         checkZipCode(zipCode);
         String number = CreateParameter.createString("Number: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(number);
         String state = CreateParameter.createString("State: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(state);
         String city = CreateParameter.createString("City: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(city);
         String complement = CreateParameter.createString("Complement: ");
+        CheckIfDataIsEmpty.checkIfIsEmpty(complement);
         System.out.println("=/".repeat(30));
 
 
