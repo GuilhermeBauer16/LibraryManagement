@@ -1,4 +1,4 @@
 # Library Management
 ## Objective
 
-An library system when the user must to buy books, filter for category, see the books that's already brought, but for the user do this, he must to create a user or log in.
+In the library system, the user buys books, filters for categories, and sees the books bought. For The user to do this, he must create a user or log in.
