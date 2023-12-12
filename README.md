@@ -5,6 +5,8 @@ In the library system, the user buys books, filters for categories, and sees the
 
 ## Example of working
 ![image](https://github.com/GuilhermeBauer16/LibraryManagement/assets/123701893/b84be00a-b145-4e45-81b2-df98b3c2f75a)
+![image](https://github.com/GuilhermeBauer16/LibraryManagement/assets/123701893/d1dd51d0-635a-431c-bc53-f1a3b9be1162)
+
 
 
 ## Learnings
