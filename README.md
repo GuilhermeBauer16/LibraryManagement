@@ -3,7 +3,7 @@
     
 In the library system, the user buys books, filters for categories, and sees the books bought. For The user to do this, he must create a user or log in.                
 
-## Example of working.                    
+## Example of working.                        
 ![image](https://github.com/GuilhermeBauer16/LibraryManagement/assets/123701893/d1dd51d0-635a-431c-bc53-f1a3b9be1162)
 
 
